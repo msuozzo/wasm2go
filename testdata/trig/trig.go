@@ -61,16 +61,14 @@ l1:
 			goto l2
 		} else {
 			switch int32(v4)&i32(3) - i32(1) {
-			case 0:
-				goto l3
 			case 1:
 				goto l4
 			case 2:
 				goto l5
 			default:
 				goto l0
+			case 0:
 			}
-		l3:
 		}
 		return v0
 	l4:
