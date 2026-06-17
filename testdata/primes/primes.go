@@ -10,14 +10,14 @@ func New() *Module {
 	return m
 }
 func (m *Module) Xis_prime(v0 int32) int32 {
-	var t0, t1, v1 int32
+	var t1, v1 int32
 	if uint32(v0) < uint32(i32(2)) {
 		return i32(0)
 	}
 	if v0 == i32(2) {
 		return i32(1)
 	}
-	t0 = int32(uint32(v0) % uint32(i32(2)))
+	var t0 int32 = int32(uint32(v0) % uint32(i32(2)))
 	if t0 == i32(0) {
 		return i32(0)
 	}

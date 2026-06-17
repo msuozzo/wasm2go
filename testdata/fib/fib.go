@@ -10,7 +10,7 @@ func New() *Module {
 	return m
 }
 func (m *Module) Xfibonacci(v0 int64) int64 {
-	var p2, t3, v1, v2 int64
+	var p2, v1, v2 int64
 	p0 := i64(0)
 	if v0 > i64(0) {
 		p0 = v0
@@ -24,7 +24,7 @@ l0:
 		p2 = v2
 	} else {
 		v0 = v0 - i64(1)
-		t3 = v2
+		var t3 int64 = v2
 		v2 = v1
 		v1 = t3 + v2
 		goto l0
