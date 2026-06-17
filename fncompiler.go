@@ -603,6 +603,7 @@ func (fn *funcCompiler) cleanup() {
 	passes.RemoveBlankAssigns(fn.decl)
 	passes.RemoveUnusedLocals(fn.decl)
 	passes.InlineSwitchTargets(fn.decl)
+	passes.ReconstructLoops(fn.decl)
 	passes.HoistVars(fn.decl)
 	passes.UnnestBlocks(fn.decl)
 	passes.RemoveEmptyStmts(fn.decl)

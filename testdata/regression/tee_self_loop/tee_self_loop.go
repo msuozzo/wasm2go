@@ -25,9 +25,11 @@ func (m *Module) fn0(v0 int32) {
 	m._env.Xfn(v0)
 }
 func (m *Module) Xtee_self_loop(v0 int32) {
-l0:
-	m.fn0(v0)
-	if v0 != 0 {
-		goto l0
+	for {
+		m.fn0(v0)
+		if v0 != 0 {
+			continue
+		}
+		break
 	}
 }
