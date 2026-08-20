@@ -16,8 +16,8 @@ jobs:
 
     steps:
     - uses: docker/setup-qemu-action@v4
-    - uses: actions/checkout@v6
-    - uses: actions/setup-go@v6
+    - uses: actions/checkout@v7
+    - uses: actions/setup-go@v7
       with: { go-version: stable }
 
     - name: Test
@@ -56,8 +56,8 @@ jobs:
     runs-on: ubuntu-24.04-arm
 
     steps:
-    - uses: actions/checkout@v6
-    - uses: actions/setup-go@v6
+    - uses: actions/checkout@v7
+    - uses: actions/setup-go@v7
       with: { go-version: stable }
 
     - name: Generate
@@ -100,7 +100,7 @@ jobs:
     needs: test
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Test
       run: go test -args -unsafe
