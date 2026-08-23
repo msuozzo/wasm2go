@@ -80,6 +80,16 @@ Another knob is whether to attempt to ensure float operations
 This is tested to work on both `amd64` and `arm64`,
 but is known to be broken on most other CPU architectures.
 
+Wasm fixed-width SIMD is supported: by default `v128` lane math
+is compiled to portable, self-contained Go helpers.
+With `simd-only`, helpers instead use Go ≥1.27's experimental
+[`simd/archsimd`](https://pkg.go.dev/simd/archsimd) package where
+its instructions are Wasm-faithful (falling back to portable code
+where they're not, e.g. float min/max NaN handling).
+The generated file is then constrained to
+`goexperiment.simd && (amd64 || arm64)`,
+and must be built with `GOEXPERIMENT=simd` set.
+
 ## Usage
 
 ```
@@ -100,6 +110,8 @@ Usage: wasm2go [option]... [input.wasm]
         package name (default module name, or wasm2go)
   -provided value
         file containing provided import functions
+  -simd-only
+        use simd/archsimd for SIMD (requires GOEXPERIMENT=simd, amd64 or arm64)
   -tags string
         go:build tags to include in the generated file
   -unsafe

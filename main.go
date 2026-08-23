@@ -19,6 +19,7 @@ var (
 	nanbox    = flag.Bool("nanbox", false, "attempt to canonicalize NaNs")
 	nohost    = flag.Bool("nohost", false, "don't generate interfaces for imports")
 	noopt     = flag.Bool("noopt", false, "disable all optimization passes")
+	simdonly  = flag.Bool("simd-only", false, "use simd/archsimd for SIMD (requires GOEXPERIMENT=simd, amd64 or arm64)")
 	unsafe    = flag.Bool("unsafe", false, "allow importing unsafe")
 	dwarfline = flag.Bool("dwarfline", false, "use line numbers from DWARF metadata")
 	version   = flag.Bool("version", false, "print version and exit")
@@ -117,4 +118,17 @@ func needsUnsafe(msg string) {
 	if !*unsafe {
 		log.Fatal("needs unsafe: " + msg)
 	}
+}
+
+// The go:build constraint for the generated file:
+// -simd-only output only builds where simd/archsimd is available.
+func buildConstraint() string {
+	if !*simdonly {
+		return *tags
+	}
+	const simd = "goexperiment.simd && (amd64 || arm64)"
+	if *tags == "" {
+		return simd
+	}
+	return "(" + *tags + ") && " + simd
 }
