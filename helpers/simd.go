@@ -336,11 +336,13 @@ func i64x2_all_true(v v128) int32 {
 }
 
 //go:nosplit
-func i8x16_bitmask(v v128) (r int32) {
-	for i := range v {
-		r |= int32(v[i]>>7) << i
-	}
-	return
+func i8x16_bitmask(v v128) int32 {
+	// SWAR movemask: gather each byte's MSB into one bit per lane.
+	const msb = 0x8080808080808080
+	const mul = 0x0102040810204080
+	lo := (binary.LittleEndian.Uint64(v[0:8])&msb)>>7*mul>>56
+	hi := (binary.LittleEndian.Uint64(v[8:16])&msb)>>7*mul>>56
+	return int32(hi<<8 | lo)
 }
 
 //go:nosplit
