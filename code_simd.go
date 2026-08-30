@@ -650,14 +650,7 @@ func (fn *funcCompiler) simdStoreLane(name string, bits int, offset uint64) erro
 		return nil
 	}
 	sbits := fmt.Sprint(bits)
-	fn.helpers.add("store" + sbits)
-	fn.emit(&ast.ExprStmt{X: &ast.CallExpr{
-		Fun: newID("store" + sbits),
-		Args: []ast.Expr{
-			&ast.SliceExpr{
-				X:   fn.memory.selector,
-				Low: fn.popAddr(offset)},
-			convert(val, "uint"+sbits)}}})
+	fn.emit(&ast.ExprStmt{X: fn.memCall("store", sbits, offset, convert(val, "uint"+sbits))})
 	return nil
 }
 

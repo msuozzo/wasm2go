@@ -136,18 +136,47 @@ func (fn *funcCompiler) load8(offset uint64) ast.Expr {
 		Index: fn.popAddr(offset)}
 }
 
+// Returns a call to the loadNN/storeNN helper family for this memory.
+// Under -unsafe, 32-bit memories use the two-argument (mem, addr) helpers,
+// whose single bounds check relies on popAddr producing a non-negative
+// address (uint32(index) [+ constant offset] ∈ [0, 2³²+2³²)). 64-bit
+// memories keep the slice form (loadNNs/storeNNs): their wrap-around trap
+// encoding can produce negative addresses that need the slice expression's
+// own check.
+func (fn *funcCompiler) memCall(op, bits string, offset uint64, val ast.Expr) *ast.CallExpr {
+	addr := fn.popAddr(offset)
+	name := op + bits
+	if *unsafe && !fn.memory.is64 {
+		fn.helpers.add(name)
+		if offset == 0 {
+			// popAddr returned a uint32 expression; the helper takes int64.
+			addr = convert(addr, "int64")
+		}
+		args := []ast.Expr{fn.memory.selector, addr}
+		if val != nil {
+			args = append(args, val)
+		}
+		return &ast.CallExpr{Fun: newID(name), Args: args}
+	}
+	if *unsafe {
+		name += "s"
+	}
+	fn.helpers.add(name)
+	args := []ast.Expr{&ast.SliceExpr{
+		X:   fn.memory.selector,
+		Low: addr}}
+	if val != nil {
+		args = append(args, val)
+	}
+	return &ast.CallExpr{Fun: newID(name), Args: args}
+}
+
 // Returns an expression that loads bytes from memory.
 func (fn *funcCompiler) load(typ string, offset uint64) (expr ast.Expr) {
-	addr := fn.popAddr(offset)
 	bits := typ[len(typ)-2:]
 
 	// Load as unsigned, little-endian.
-	fn.helpers.add("load" + bits)
-	expr = &ast.CallExpr{
-		Fun: newID("load" + bits),
-		Args: []ast.Expr{&ast.SliceExpr{
-			X:   fn.memory.selector,
-			Low: addr}}}
+	expr = fn.memCall("load", bits, offset, nil)
 
 	switch {
 	case strings.HasPrefix(typ, "float"):
@@ -165,7 +194,6 @@ func (fn *funcCompiler) load(typ string, offset uint64) (expr ast.Expr) {
 // Returns a statement that stores bytes to memory.
 func (fn *funcCompiler) store(typ string, offset uint64) ast.Stmt {
 	val := fn.pop()
-	addr := fn.popAddr(offset)
 	bits := typ[len(typ)-2:]
 
 	if strings.HasPrefix(typ, "float") {
@@ -179,14 +207,7 @@ func (fn *funcCompiler) store(typ string, offset uint64) ast.Stmt {
 	}
 
 	// Store as unsigned, little-endian.
-	fn.helpers.add("store" + bits)
-	return &ast.ExprStmt{X: &ast.CallExpr{
-		Fun: newID("store" + bits),
-		Args: []ast.Expr{
-			&ast.SliceExpr{
-				X:   fn.memory.selector,
-				Low: addr},
-			val}}}
+	return &ast.ExprStmt{X: fn.memCall("store", bits, offset, val)}
 }
 
 // Pushes expr (a literal, constant or materialized temporary) to the value stack.
