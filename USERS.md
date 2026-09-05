@@ -11,20 +11,23 @@ An incomplete list of libraries using wasm2go.
 - [**github.com/pgaskin/go-marisa**](https://github.com/pgaskin/go-marisa) \
   Go bindings for [marisa-trie](https://github.com/s-yata/marisa-trie).
 
+- [**github.com/pgaskin/go-libz**](https://github.com/pgaskin/go-libz) \
+  Go bindings for [sortix libz](https://gitlab.com/sortix/libz).
+
+- [**github.com/pgaskin/go-lightningcss**](https://github.com/pgaskin/go-lightningcss) \
+  Go bindings for [LightningCSS](https://github.com/parcel-bundler/lightningcss).
+
 - [**github.com/pgaskin/go-pcapfilter**](https://github.com/pgaskin/go-pcapfilter) \
   Go bindings for [libpcap](https://github.com/the-tcpdump-group/libpcap) to compile tcpdump-style BPF filters.
 
 - [**github.com/pgaskin/go-hbsubset**](https://github.com/pgaskin/go-hbsubset) \
   Go bindings for [HarfBuzz](https://github.com/harfbuzz/harfbuzz)'s font subsetter.
 
-- [**github.com/pgaskin/go-lightningcss**](https://github.com/pgaskin/go-lightningcss) \
-  Go bindings for [LightningCSS](https://github.com/parcel-bundler/lightningcss).
-
 - [**github.com/pgaskin/go-woff2**](https://github.com/pgaskin/go-woff2) \
   Go bindings for [woff2](https://github.com/google/woff2).
 
-- [**github.com/pgaskin/go-libz**](https://github.com/pgaskin/go-libz) \
-  Go bindings for [sortix libz](https://gitlab.com/sortix/libz).
+- [**github.com/seruman/hauntty**](https://github.com/seruman/hauntty) \
+  Contains Go bindings for [libghostty](https://github.com/ghostty-org/ghostty).
   
 - [**github.com/lbe/wasm2go-wasi-host**](https://github.com/lbe/wasm2go-wasi-host) \
   Implementation of [WASI snapshot-preview1](https://github.com/WebAssembly/WASI/tree/wasi-0.1) for wasm2go.
@@ -32,11 +35,11 @@ An incomplete list of libraries using wasm2go.
 - [**github.com/lbe/go-exiftool-wasm**](https://github.com/lbe/go-exiftool-wasm) \
   Go library that runs [exiftool](https://exiftool.org/) in-process using wasm2go with [zeroperl](https://github.com/6over3/zeroperl).
 
-- [**github.com/seruman/hauntty**](https://github.com/seruman/hauntty) \
-  Contains Go bindings for [libghostty](https://github.com/ghostty-org/ghostty).
+- [**github.com/msuozzo/bonsai**](https://github.com/msuozzo/bonsai) \
+  Go bindings for [treesitter](https://github.com/tree-sitter/tree-sitter).
+
+- [**github.com/gregfurman/micropython-go**](https://github.com/gregfurman/micropython-go) \
+  Go bindings for [MicroPython](https://github.com/micropython/micropython).
 
 - [**github.com/luist18/sqlite-vec-go**](https://github.com/luist18/sqlite-vec-go) \
   Bindings to use [sqlite-vec](https://github.com/asg017/sqlite-vec) with [go-sqlite3](https://github.com/ncruces/go-sqlite3).
-
-- [**github.com/msuozzo/bonsai**](https://github.com/msuozzo/bonsai) \
-  Go bindings for [treesitter](https://github.com/tree-sitter/tree-sitter).
