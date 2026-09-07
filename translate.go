@@ -63,9 +63,10 @@ type translator struct {
 	in  *offset.Reader
 	out ast.File
 	// Dependencies.
-	packages set[string]
-	provided set[string]
-	helpers  set[string]
+	packages     set[string]
+	provided     set[string]
+	providedRefs set[string]
+	helpers      set[string]
 	// Sections.
 	types     []funcType
 	imports   []importDef
@@ -95,6 +96,7 @@ func translate(r io.Reader, w io.Writer) error {
 	fset := token.NewFileSet()
 	t.packages = set[string]{}
 	t.provided = set[string]{}
+	t.providedRefs = set[string]{}
 	t.helpers = set[string]{}
 
 	for _, file := range provided {
@@ -102,6 +104,15 @@ func translate(r io.Reader, w io.Writer) error {
 		if err != nil {
 			return err
 		}
+		// Extract all functions provided files call for useProvidedFileHelpers.
+		ast.Inspect(f, func(n ast.Node) bool {
+			if call, ok := n.(*ast.CallExpr); ok {
+				if id, ok := call.Fun.(*ast.Ident); ok {
+					t.providedRefs.add(id.Name)
+				}
+			}
+			return true
+		})
 		for _, decl := range f.Decls {
 			// Check if the receiver type is *Module.
 			if fn, ok := decl.(*ast.FuncDecl); ok && fn.Recv != nil {
@@ -175,6 +186,9 @@ func translate(r io.Reader, w io.Writer) error {
 	t.out.Decls = append(t.out.Decls, t.createExportMethods()...)
 
 	// Add helpers.
+	if err := t.useProvidedFileHelpers(fset); err != nil {
+		return err
+	}
 	if len(t.helpers) > 0 {
 		if *unsafe {
 			if err := t.addHelpers(fset, "cpuarch_unsafe.go", helpersCpuArchSrc); err != nil {
@@ -1218,6 +1232,28 @@ func (t *translator) readDylink0Section(r *bytes.Reader) error {
 			_, err := r.Seek(int64(size), io.SeekCurrent)
 			if err != nil {
 				return err
+			}
+		}
+	}
+	return nil
+}
+
+func (t *translator) useProvidedFileHelpers(fset *token.FileSet) error {
+	if len(t.providedRefs) == 0 {
+		return nil
+	}
+	srcs := []string{helpersSrc}
+	if *unsafe {
+		srcs = append(srcs, helpersUnsafeSrc, helpersAtomicsSrc)
+	}
+	for _, src := range srcs {
+		f, err := parser.ParseFile(fset, "", src, 0)
+		if err != nil {
+			return err
+		}
+		for _, decl := range f.Decls {
+			if fn, ok := decl.(*ast.FuncDecl); ok && t.providedRefs.has(fn.Name.Name) {
+				t.helpers.add(fn.Name.Name)
 			}
 		}
 	}
