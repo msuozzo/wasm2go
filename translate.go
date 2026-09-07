@@ -98,6 +98,9 @@ func translate(r io.Reader, w io.Writer) error {
 	t.helpers = set[string]{}
 
 	helperNames, err := t.findHelpers(fset, helpersSrc, helpersAtomicsSrc)
+	if err != nil {
+		return err
+	}
 	for _, file := range provided {
 		f, err := parser.ParseFile(fset, file, nil, 0)
 		if err != nil {
@@ -1237,7 +1240,7 @@ func (t *translator) readDylink0Section(r *bytes.Reader) error {
 
 func (t *translator) findHelpers(fset *token.FileSet, src ...string) (set[string], error) {
 	names := set[string]{}
-	for src := range src {
+	for _, src := range src {
 		f, err := parser.ParseFile(fset, "", src, 0)
 		if err != nil {
 			return nil, err

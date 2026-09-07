@@ -6,6 +6,7 @@ import (
 	_ "embed"
 	"testing"
 
+	provided_helper_test "github.com/ncruces/wasm2go/testdata/regression/provided_helper"
 	select_test "github.com/ncruces/wasm2go/testdata/regression/select_effect"
 	store_grow_test "github.com/ncruces/wasm2go/testdata/regression/store_grow"
 )
@@ -36,5 +37,13 @@ func Test_regression_store_grow(t *testing.T) {
 	}
 	if got := m.Xsize(); got != 2 {
 		t.Errorf("size = %d, want 2", got)
+	}
+}
+
+func Test_regression_provided_helper(t *testing.T) {
+	m := provided_helper_test.New()
+
+	if got := m.Xtest(); got != 0x0807060504030201 {
+		t.Errorf("test() = %#x, want 0x0807060504030201 (provided import must be able to call load64)", got)
 	}
 }
