@@ -1,18 +1,18 @@
-#include "string.h"
-#include "stdlib.h"
+#include <stdlib.h>
+#include <string.h>
 
-__attribute__((always_inline))
-void* (memset)(void* p, int v, size_t n) {
+__attribute__((always_inline)) void*(memset)(void* p, int v, size_t n) {
   return __builtin_memset(p, v, n);
 }
 
-__attribute__((always_inline))
-void* (memcpy)(void* restrict d, const void* restrict s, size_t n) {
+__attribute__((always_inline)) void*(memcpy)(void* restrict d,
+                                             const void* restrict s, size_t n) {
   return __builtin_memcpy(d, s, n);
 }
 
-__attribute__((always_inline))
-void* (memmove)(void* restrict d, const void* restrict s, size_t n) {
+__attribute__((always_inline)) void*(memmove)(void* restrict d,
+                                              const void* restrict s,
+                                              size_t n) {
   return __builtin_memmove(d, s, n);
 }
 
@@ -46,8 +46,10 @@ char* strtok(char* restrict s, const char* restrict sep) {
   s += strspn(s, sep);
   if (!*s) return p = 0;
   p = s + strcspn(s, sep);
-  if (*p) *p++ = 0;
-  else p = 0;
+  if (*p)
+    *p++ = 0;
+  else
+    p = 0;
   return s;
 }
 

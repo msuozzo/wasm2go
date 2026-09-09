@@ -6,19 +6,18 @@
 // and expects it to be contiguous,
 // but can cope with non-contiguities.
 
+#include <stdalign.h>
 #include <stdint.h>
 #include <stdlib.h>
-
-#define PAGESIZE 65536
 
 #define LACKS_FCNTL_H
 #define LACKS_SCHED_H
 #define LACKS_SYS_MMAN_H
 #define LACKS_SYS_PARAM_H
-#define LACKS_TIME_H // prefer determinism
+#define LACKS_TIME_H  // prefer determinism
 
 #define HAVE_MMAP 0
-#define MALLOC_ALIGNMENT 16
+#define MALLOC_ALIGNMENT alignof(max_align_t)
 #define MALLOC_FAILURE_ACTION
 #define MORECORE_CANNOT_TRIM 1
 #define NO_MALLINFO 1
@@ -54,5 +53,7 @@ static void init_allocator(void) {
   init_top(gm, (mchunkptr)__heap_base, heap_size - TOP_FOOT_SIZE);
 }
 
-__attribute__((alias("memalign")))
-void* aligned_alloc(size_t align, size_t size);
+void* aligned_alloc(size_t align, size_t size) {
+  if (align <= 0 || ((align | size) & (align - 1))) return NULL;
+  return memalign(align, size);
+}
