@@ -35,7 +35,7 @@ extern char __heap_end[];
 // Initialize dlmalloc to be able to use the memory between
 // __heap_base and __heap_end.
 static void init_allocator(void) {
-  if (is_initialized(gm)) __builtin_trap();
+  assert(!is_initialized(gm));
   ensure_initialization();
 
   size_t heap_size = __heap_end - __heap_base;

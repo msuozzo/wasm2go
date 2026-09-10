@@ -86,14 +86,6 @@ static inline int tlsf_fls(size_t size) {
 // The zero-based index of the lowest set bit.
 static inline int tlsf_ffs(size_t size) { return __builtin_ctzg(size, -1); }
 
-static inline void* tlsf_block_to_payload(const block_header_t* block) {
-  return (void*)((char*)block + sizeof(block_header_t));
-}
-
-static inline block_header_t* tlsf_payload_to_block(const void* ptr) {
-  return (block_header_t*)((char*)ptr - sizeof(block_header_t));
-}
-
 static inline size_t tlsf_block_get_size(const block_header_t* block) {
   return block->size & ~BLOCK_TAG_MASK;
 }
@@ -138,9 +130,19 @@ static inline block_header_t* tlsf_block_next_phys(
 
 static inline block_header_t* tlsf_block_prev_phys(
     const block_header_t* block) {
-  if (!tlsf_block_is_prev_free(block)) __builtin_trap();
   size_t prev_size = *(const size_t*)((const char*)block - sizeof(size_t));
   return (block_header_t*)((char*)block - prev_size);
+}
+
+static inline void* tlsf_block_to_payload(const block_header_t* block) {
+  return (void*)(block + 1);
+}
+
+static inline block_header_t* tlsf_payload_to_block(const void* ptr) {
+  assert(((uintptr_t)ptr & (ALIGN_SIZE - 1)) == 0);
+  block_header_t* block = (block_header_t*)ptr - 1;
+  assert(!tlsf_block_is_free(block));
+  return block;
 }
 
 static void tlsf_mapping(size_t size, bool insert, int* restrict fl,
@@ -472,4 +474,7 @@ size_t malloc_good_size(size_t size) {
 extern char __heap_base[];
 extern char __heap_end[];
 
-static void init_allocator(void) { tlsf_add_pool(__heap_base, __heap_end); }
+static void init_allocator(void) {
+  assert(g_tlsf.heap_end == 0);
+  tlsf_add_pool(__heap_base, __heap_end);
+}

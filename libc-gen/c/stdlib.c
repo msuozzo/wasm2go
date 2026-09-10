@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-__attribute__((always_inline)) void abort(void) { __builtin_trap(); }
+__attribute__((always_inline)) void(abort)(void) { __builtin_trap(); }
 
 __attribute__((always_inline)) int(abs)(int x) { return __builtin_abs(x); }
 
