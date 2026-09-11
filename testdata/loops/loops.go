@@ -50,7 +50,7 @@ l1:
 			return v4
 		}
 		v3 = v0 + v2*i32(4)
-		t0 := int32(load32((*m.memory)[uint32(v3):]))
+		t0 := int32(load32(*m.memory, uint32(v3)))
 		v4 = v4 + t0
 		v2 = v2 + i32(1)
 		goto l1
@@ -84,6 +84,6 @@ l1:
 func i32(x int32) int32 { return x }
 
 //go:nosplit
-func load32(b []byte) uint32 {
-	return binary.LittleEndian.Uint32(b)
+func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+	return binary.LittleEndian.Uint32(mem[addr:])
 }
