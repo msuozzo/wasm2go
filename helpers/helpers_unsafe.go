@@ -11,73 +11,79 @@ import (
 // Faster memory access, using unsafe.
 
 //go:nosplit
-func load16(b []byte) uint16 {
+func load16[T uint32 | int64](mem []byte, addr T) uint16 {
 	if !unalignedOK {
-		return binary.LittleEndian.Uint16(b)
+		return binary.LittleEndian.Uint16(mem[addr:])
 	}
-	v := *(*uint16)(unsafe.Pointer((*[2]byte)(b)))
+	_ = (*[2]byte)(mem[addr:])
+	val := *(*uint16)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
-		return bits.ReverseBytes16(v)
+		return bits.ReverseBytes16(val)
 	}
-	return v
+	return val
 }
 
 //go:nosplit
-func store16(b []byte, v uint16) {
+func store16[T uint32 | int64](mem []byte, addr T, val uint16) {
 	if !unalignedOK {
-		binary.LittleEndian.PutUint16(b, v)
+		binary.LittleEndian.PutUint16(mem[addr:], val)
 		return
 	}
 	if big {
-		v = bits.ReverseBytes16(v)
+		val = bits.ReverseBytes16(val)
 	}
-	*(*uint16)(unsafe.Pointer((*[2]byte)(b))) = v
+	_ = (*[2]byte)(mem[addr:])
+	*(*uint16)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
 //go:nosplit
-func load32(b []byte) uint32 {
+func load32[T uint32 | int64](mem []byte, addr T) uint32 {
 	if !unalignedOK {
-		return binary.LittleEndian.Uint32(b)
+		return binary.LittleEndian.Uint32(mem[addr:])
 	}
-	v := *(*uint32)(unsafe.Pointer((*[4]byte)(b)))
+	_ = (*[4]byte)(mem[addr:])
+	val := *(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
-		return bits.ReverseBytes32(v)
+		return bits.ReverseBytes32(val)
 	}
-	return v
+	return val
 }
 
 //go:nosplit
-func store32(b []byte, v uint32) {
+func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
 	if !unalignedOK {
-		binary.LittleEndian.PutUint32(b, v)
+		binary.LittleEndian.PutUint32(mem[addr:], val)
 		return
 	}
 	if big {
-		v = bits.ReverseBytes32(v)
+		val = bits.ReverseBytes32(val)
 	}
-	*(*uint32)(unsafe.Pointer((*[4]byte)(b))) = v
+	_ = (*[4]byte)(mem[addr:])
+	*(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
 //go:nosplit
-func load64(b []byte) uint64 {
+func load64[T uint32 | int64](mem []byte, addr T) uint64 {
 	if !unalignedOK {
-		return binary.LittleEndian.Uint64(b)
+		return binary.LittleEndian.Uint64(mem[addr:])
 	}
-	v := *(*uint64)(unsafe.Pointer((*[8]byte)(b)))
+	_ = (*[8]byte)(mem[addr:])
+	val := *(*uint64)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
-		return bits.ReverseBytes64(v)
+		return bits.ReverseBytes64(val)
 	}
-	return v
+	return val
 }
 
 //go:nosplit
-func store64(b []byte, v uint64) {
+func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
 	if !unalignedOK {
-		binary.LittleEndian.PutUint64(b, v)
+		binary.LittleEndian.PutUint64(mem[addr:], val)
 		return
 	}
 	if big {
-		v = bits.ReverseBytes64(v)
+		val = bits.ReverseBytes64(val)
 	}
-	*(*uint64)(unsafe.Pointer((*[8]byte)(b))) = v
+	_ = (*[8]byte)(mem[addr:])
+	*(*uint64)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }

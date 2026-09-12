@@ -144,10 +144,8 @@ func (fn *funcCompiler) load(typ string, offset uint64) (expr ast.Expr) {
 	// Load as unsigned, little-endian.
 	fn.helpers.add("load" + bits)
 	expr = &ast.CallExpr{
-		Fun: newID("load" + bits),
-		Args: []ast.Expr{&ast.SliceExpr{
-			X:   fn.memory.selector,
-			Low: addr}}}
+		Fun:  newID("load" + bits),
+		Args: []ast.Expr{fn.memory.selector, addr}}
 
 	switch {
 	case strings.HasPrefix(typ, "float"):
@@ -181,12 +179,8 @@ func (fn *funcCompiler) store(typ string, offset uint64) ast.Stmt {
 	// Store as unsigned, little-endian.
 	fn.helpers.add("store" + bits)
 	return &ast.ExprStmt{X: &ast.CallExpr{
-		Fun: newID("store" + bits),
-		Args: []ast.Expr{
-			&ast.SliceExpr{
-				X:   fn.memory.selector,
-				Low: addr},
-			val}}}
+		Fun:  newID("store" + bits),
+		Args: []ast.Expr{fn.memory.selector, addr, val}}}
 }
 
 // Pushes expr (a literal, constant or materialized temporary) to the value stack.
