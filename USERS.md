@@ -43,3 +43,18 @@ An incomplete list of libraries using wasm2go.
 
 - [**github.com/luist18/sqlite-vec-go**](https://github.com/luist18/sqlite-vec-go) \
   Bindings to use [sqlite-vec](https://github.com/asg017/sqlite-vec) with [go-sqlite3](https://github.com/ncruces/go-sqlite3).
+
+- [**github.com/gen2brain/avif**](https://github.com/gen2brain/avif) \
+  Go bindings for [libavif](https://github.com/AOMediaCodec/libavif) with [aom](https://aomedia.googlesource.com/aom/) and [dav1d](https://code.videolan.org/videolan/dav1d).
+
+- [**github.com/gen2brain/heic**](https://github.com/gen2brain/heic) \
+  Go bindings for the [heic](https://crates.io/crates/heic) crate.
+
+- [**github.com/gen2brain/jpegli**](https://github.com/gen2brain/jpegli) \
+  Go bindings for [jpegli](https://github.com/google/jpegli).
+
+- [**github.com/gen2brain/jpegxl**](https://github.com/gen2brain/jpegxl) \
+  Go bindings for [libjxl](https://github.com/libjxl/libjxl).
+
+- [**github.com/gen2brain/webp**](https://github.com/gen2brain/webp) \
+  Go bindings for [libwebp](https://github.com/webmproject/libwebp).
