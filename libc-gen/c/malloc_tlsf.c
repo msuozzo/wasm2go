@@ -80,11 +80,11 @@ static struct {
 
 // The zero-based index of the highest set bit.
 static inline int tlsf_fls(size_t size) {
-  return (int)BITS_PER_WORD - __builtin_clzg(size, (int)BITS_PER_WORD) - 1;
+  return (int)BITS_PER_WORD - __builtin_clzg(size) - 1;
 }
 
 // The zero-based index of the lowest set bit.
-static inline int tlsf_ffs(size_t size) { return __builtin_ctzg(size, -1); }
+static inline int tlsf_ffs(size_t size) { return __builtin_ctzg(size); }
 
 static inline size_t tlsf_block_get_size(const block_header_t* block) {
   return block->size & ~BLOCK_TAG_MASK;
@@ -135,14 +135,24 @@ static inline block_header_t* tlsf_block_prev_phys(
 }
 
 static inline void* tlsf_block_to_payload(const block_header_t* block) {
-  return (void*)(block + 1);
+  return __builtin_assume_aligned(block + 1, ALIGN_SIZE);
 }
 
 static inline block_header_t* tlsf_payload_to_block(const void* ptr) {
-  assert(((uintptr_t)ptr & (ALIGN_SIZE - 1)) == 0);
+  assert(__builtin_is_aligned(ptr, ALIGN_SIZE));
   block_header_t* block = (block_header_t*)ptr - 1;
   assert(!tlsf_block_is_free(block));
   return block;
+}
+
+static inline size_t tlsf_mapping_size(size_t size) {
+  if (size < (1U << FL_INDEX_SHIFT)) {
+    // No rounding needed: size is aligned.
+    return size;
+  }
+  int t = tlsf_fls(size);
+  int shift = t - SL_INDEX_LOG2;
+  return __builtin_align_up(size, (size_t)1 << shift);
 }
 
 static void tlsf_mapping(size_t size, bool insert, int* restrict fl,
@@ -164,7 +174,7 @@ static void tlsf_mapping(size_t size, bool insert, int* restrict fl,
 
   // To search for a free block, get the next size up,
   // if we needed to round down.
-  if (size & ((1ULL << shift) - 1)) {
+  if (!__builtin_is_aligned(size, (size_t)1 << shift)) {
     *sl += 1;
     if (*sl == SL_INDEX_COUNT) {
       *sl = 0;
@@ -340,7 +350,8 @@ void* malloc(size_t size) {
   if (free_block == NULL) {
     // Growth size needs to accommodate at least the block,
     // a sentinel header, and potential alignment overhead.
-    size_t req_size = block_size + sizeof(block_header_t) + ALIGN_SIZE;
+    size_t req_size =
+        tlsf_mapping_size(block_size) + sizeof(block_header_t) + ALIGN_SIZE;
     size_t npages = __builtin_align_up(req_size, PAGESIZE) / PAGESIZE;
 
     size_t old = __builtin_wasm_memory_grow(0, npages);
@@ -349,7 +360,7 @@ void* malloc(size_t size) {
     tlsf_add_pool((char*)(old * PAGESIZE), (char*)((old + npages) * PAGESIZE));
 
     free_block = tlsf_find_free_block(block_size);
-    if (free_block == NULL) return NULL;
+    if (free_block == NULL) __builtin_trap();
   }
 
   tlsf_remove_free_block(free_block);
@@ -408,7 +419,7 @@ void* realloc(void* ptr, size_t size) {
 
 void* memalign(size_t align, size_t size) {
   if (size == 0 || size > PTRDIFF_MAX) return NULL;
-  if (align <= 0 || (align & (align - 1))) return NULL;
+  if (__builtin_popcountg(align) != 1) return NULL;
   if (align <= ALIGN_SIZE) return malloc(size);
 
   // Request enough space to guarantee finding an aligned boundary,
@@ -456,7 +467,8 @@ void* calloc(size_t nelem, size_t elsize) {
 }
 
 void* aligned_alloc(size_t align, size_t size) {
-  if (align <= 0 || ((align | size) & (align - 1))) return NULL;
+  if (__builtin_popcountg(align) != 1) return NULL;
+  if (!__builtin_is_aligned(size, align)) return NULL;
   return memalign(align, size);
 }
 

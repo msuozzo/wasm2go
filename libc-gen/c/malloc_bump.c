@@ -63,7 +63,7 @@ void* malloc(size_t size) {
 
 void* memalign(size_t align, size_t size) {
   if (size == 0 || size > PTRDIFF_MAX) return NULL;
-  if (align <= 0 || (align & (align - 1))) return NULL;
+  if (__builtin_popcountg(align) != 1) return NULL;
   if (align <= ALIGN_SIZE) return malloc(size);
 
   size_t need;
@@ -115,7 +115,8 @@ void* calloc(size_t nelem, size_t elsize) {
 }
 
 void* aligned_alloc(size_t align, size_t size) {
-  if (align <= 0 || ((align | size) & (align - 1))) return NULL;
+  if (__builtin_popcountg(align) != 1) return NULL;
+  if (!__builtin_is_aligned(size, align)) return NULL;
   return memalign(align, size);
 }
 

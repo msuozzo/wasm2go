@@ -56,7 +56,8 @@ static void init_allocator(void) {
 }
 
 void* aligned_alloc(size_t align, size_t size) {
-  if (align <= 0 || ((align | size) & (align - 1))) return NULL;
+  if (__builtin_popcountg(align) != 1) return NULL;
+  if (!__builtin_is_aligned(size, align)) return NULL;
   return memalign(align, size);
 }
 
