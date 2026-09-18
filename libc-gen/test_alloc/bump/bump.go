@@ -193,11 +193,11 @@ const (
 )
 
 //go:nosplit
-func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+func load32[T uint32 | uint64](mem []byte, addr T) uint32 {
 	if !unalignedOK {
 		return binary.LittleEndian.Uint32(mem[addr:])
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	val := *(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
 		return bits.ReverseBytes32(val)
@@ -206,7 +206,7 @@ func load32[T uint32 | int64](mem []byte, addr T) uint32 {
 }
 
 //go:nosplit
-func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
+func store32[T uint32 | uint64](mem []byte, addr T, val uint32) {
 	if !unalignedOK {
 		binary.LittleEndian.PutUint32(mem[addr:], val)
 		return
@@ -214,7 +214,7 @@ func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
 	if big {
 		val = bits.ReverseBytes32(val)
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	*(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
@@ -223,19 +223,18 @@ func i32(x int32) int32 { return x }
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }
 
 func memory_init[T1, T2 int | uint32 | uint64](mem []byte, data string, dest T1, src, n T2) {

@@ -2,7 +2,10 @@
 
 package wasm2go
 
-import "math"
+import (
+	"math"
+	"math/bits"
+)
 
 type Module struct {
 	memory []byte
@@ -108,17 +111,16 @@ func i64_trunc_sat_f64_s(f float64) int64 {
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }

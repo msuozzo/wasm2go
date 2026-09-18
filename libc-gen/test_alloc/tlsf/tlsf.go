@@ -98,19 +98,19 @@ l0:
 	store32(m.memory, uint32(v3), uint32(t13|i32(2)))
 	t14 := int32(load32(m.memory, uint32(v1)))
 	m._tlsf_mapping(t14&i32(-16), i32(1), v4+i32(12), v4+i32(8))
-	t15 := int32(load32(m.memory, int64(uint32(v4))+12))
+	t15 := int32(load32(m.memory, uint64(uint32(v4))+12))
 	v2 = t15
-	t16 := int32(load32(m.memory, int64(uint32(v4))+8))
+	t16 := int32(load32(m.memory, uint64(uint32(v4))+8))
 	t17 := v2 << 6
 	v3 = t16
 	v5 = t17 + v3<<2 + i32(65640)
 	t18 := int32(load32(m.memory, uint32(v5)))
 	v0 = t18
-	store32(m.memory, int64(uint32(v1))+8, uint32(i32(0)))
-	store32(m.memory, int64(uint32(v1))+4, uint32(v0))
+	store32(m.memory, uint64(uint32(v1))+8, uint32(i32(0)))
+	store32(m.memory, uint64(uint32(v1))+4, uint32(v0))
 	store32(m.memory, uint32(v5), uint32(v1))
 	if v0 != 0 {
-		store32(m.memory, int64(uint32(v0))+8, uint32(v1))
+		store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
 	}
 	t19 := int32(load32(m.memory, uint32(i32(65536))))
 	store32(m.memory, uint32(i32(65536)), uint32(t19|i32_shl(i32(1), v2)))
@@ -126,21 +126,21 @@ func (m *Module) _tlsf_remove_free_block(v0 int32) {
 	m.___stack_pointer = v2
 	t1 := int32(load32(m.memory, uint32(v0)))
 	m._tlsf_mapping(t1&i32(-16), i32(1), v2+i32(12), v2+i32(8))
-	t2 := int32(load32(m.memory, int64(uint32(v0))+8))
+	t2 := int32(load32(m.memory, uint64(uint32(v0))+8))
 	v1 = t2
-	t3 := int32(load32(m.memory, int64(uint32(v0))+4))
+	t3 := int32(load32(m.memory, uint64(uint32(v0))+4))
 	v0 = t3
 	if v0 != 0 {
-		store32(m.memory, int64(uint32(v0))+8, uint32(v1))
+		store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
 	}
 	{
 		if v1 != 0 {
-			store32(m.memory, int64(uint32(v1))+4, uint32(v0))
+			store32(m.memory, uint64(uint32(v1))+4, uint32(v0))
 			goto l0
 		}
-		t4 := int32(load32(m.memory, int64(uint32(v2))+12))
+		t4 := int32(load32(m.memory, uint64(uint32(v2))+12))
 		v3 = t4
-		t5 := int32(load32(m.memory, int64(uint32(v2))+8))
+		t5 := int32(load32(m.memory, uint64(uint32(v2))+8))
 		t6 := v3 << 6
 		v1 = t5
 		store32(m.memory, uint32(t6+v1<<2+i32(65640)), uint32(v0))
@@ -215,7 +215,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			t10 := m._tlsf_find_free_block(v2)
 			v1 = t10
 			if v1 == 0 {
-				panic("unreachable")
+				goto l1
 			}
 		}
 		m._tlsf_remove_free_block(v1)
@@ -232,9 +232,14 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			m._tlsf_block_free(v0)
 		}
 		v3 = v1 + i32(4)
+		if v3&i32(15) != 0 {
+			goto l1
+		}
 	}
 l0:
 	return v3
+l1:
+	panic("unreachable")
 }
 func (m *Module) _tlsf_find_free_block(v0 int32) int32 {
 	var v1, v2, v3 int32
@@ -243,10 +248,10 @@ func (m *Module) _tlsf_find_free_block(v0 int32) int32 {
 	m.___stack_pointer = v1
 	m._tlsf_mapping(v0, i32(0), v1+i32(12), v1+i32(8))
 	{
-		t1 := int32(load32(m.memory, int64(uint32(v1))+12))
+		t1 := int32(load32(m.memory, uint64(uint32(v1))+12))
 		v0 = t1
 		t2 := int32(load32(m.memory, uint32(v0<<2+i32(65540))))
-		t3 := int32(load32(m.memory, int64(uint32(v1))+8))
+		t3 := int32(load32(m.memory, uint64(uint32(v1))+8))
 		v2 = t2 & i32_shl(i32(-1), t3)
 		if v2 == 0 {
 			t4 := int32(load32(m.memory, uint32(i32(65536))))
@@ -255,7 +260,7 @@ func (m *Module) _tlsf_find_free_block(v0 int32) int32 {
 				goto l0
 			}
 			v0 = int32(bits.TrailingZeros32(uint32(v0)))
-			t5 := int32(load32(m.memory, int64(uint32(v0<<2))+65540))
+			t5 := int32(load32(m.memory, uint64(uint32(v0<<2))+65540))
 			v2 = t5
 		}
 		t6 := int32(load32(m.memory, uint32(v0<<6+int32(bits.TrailingZeros32(uint32(v2)))<<2+i32(65640))))
@@ -267,48 +272,63 @@ l0:
 }
 func (m *Module) _tlsf_block_split(v0, v1 int32) int32 {
 	var v2, v3, v4 int32
-	t0 := int32(load32(m.memory, uint32(v0)))
-	v2 = t0
-	v3 = v2&i32(-16) - v1
-	if uint32(v3) >= uint32(i32(16)) {
-		store32(m.memory, uint32(v0), uint32(v2&i32(15)|v1))
-		v4 = v0 + v1&i32(-16)
-		store32(m.memory, uint32(v4), uint32(v3))
+	{
+		t0 := int32(load32(m.memory, uint32(v0)))
+		v2 = t0
+		v3 = v2&i32(-16) - v1
+		if uint32(v3) >= uint32(i32(16)) {
+			if v1&i32(15) != 0 {
+				panic("unreachable")
+			}
+			store32(m.memory, uint32(v0), uint32(v2&i32(15)|v1))
+			v4 = v0 + v1
+			store32(m.memory, uint32(v4), uint32(v3))
+		}
+		return v4
 	}
-	return v4
 }
 func (m *Module) _tlsf_mapping(v0, v1, v2, v3 int32) {
 	var v4, v5 int32
-	if uint32(v0) <= uint32(i32(255)) {
-		store32(m.memory, uint32(v2), uint32(i32(0)))
-		store32(m.memory, uint32(v3), uint32(int32(uint32(v0)>>4)))
-		return
-	}
-	t0 := v2
-	v4 = int32(bits.LeadingZeros32(uint32(v0)))
-	store32(m.memory, uint32(t0), uint32(i32(24)-v4))
-	t1 := v3
-	v5 = i32_shr_u(v0, i32(27)-v4) & i32(15)
-	store32(m.memory, uint32(t1), uint32(v5))
 	{
-		if v1 != 0 {
+		if uint32(v0) <= uint32(i32(255)) {
+			if v0&i32(15) != 0 {
+				panic("unreachable")
+			}
+			store32(m.memory, uint32(v2), uint32(i32(0)))
+			store32(m.memory, uint32(v3), uint32(int32(uint32(v0)>>4)))
 			return
 		}
-		if i32_shl(v0, v4)&i32(0x7ffffff) == 0 {
-			return
+		t0 := v2
+		v4 = int32(bits.LeadingZeros32(uint32(v0)))
+		store32(m.memory, uint32(t0), uint32(i32(24)-v4))
+		t1 := v3
+		v5 = i32_shr_u(v0, i32(27)-v4) & i32(15)
+		store32(m.memory, uint32(t1), uint32(v5))
+		{
+			if v1 != 0 {
+				return
+			}
+			if i32_shl(v0, v4)&i32(0x7ffffff) == 0 {
+				return
+			}
+			t2 := v3
+			v0 = v5 + i32(1)
+			store32(m.memory, uint32(t2), uint32(v0))
+			if v0 != i32(16) {
+				return
+			}
+			store32(m.memory, uint32(v3), uint32(i32(0)))
+			store32(m.memory, uint32(v2), uint32(i32(25)-v4))
 		}
-		t2 := v3
-		v0 = v5 + i32(1)
-		store32(m.memory, uint32(t2), uint32(v0))
-		if v0 != i32(16) {
-			return
-		}
-		store32(m.memory, uint32(v3), uint32(i32(0)))
-		store32(m.memory, uint32(v2), uint32(i32(25)-v4))
+		return
 	}
 }
 func (m *Module) Xrealloc(v0, v1 int32) int32 {
 	var v2, v3, v4, v5, v6, v7 int32
+	if v0 == 0 {
+		t0 := m.Xmalloc(v1)
+		return t0
+	}
 	if v1 == 0 {
 		m.Xfree(v0)
 		return i32(0)
@@ -316,10 +336,6 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 	{
 		if v1 < i32(0) {
 			goto l0
-		}
-		if v0 == 0 {
-			t0 := m.Xmalloc(v1)
-			return t0
 		}
 		if v0&i32(15) != 0 {
 			goto l1
@@ -390,7 +406,7 @@ l2:
 	return v0
 }
 func (m *Module) Xmemalign(v0, v1 int32) int32 {
-	var v2, v3 int32
+	var v2, v3, v4 int32
 	{
 		if v1 <= i32(0) {
 			goto l0
@@ -402,7 +418,8 @@ func (m *Module) Xmemalign(v0, v1 int32) int32 {
 			t0 := m.Xmalloc(v1)
 			return t0
 		}
-		t1 := m.Xmalloc(v0 + v1)
+		v4 = v0 + v1
+		t1 := m.Xmalloc(v4)
 		v2 = t1
 		if v2 == 0 {
 			goto l0
@@ -415,24 +432,30 @@ func (m *Module) Xmemalign(v0, v1 int32) int32 {
 		if t2&i32(1) != 0 {
 			goto l1
 		}
+		t3 := v0
+		v0 = (v0 + v2 - i32(1)) & (i32(0) - v0)
+		p4 := i32(0)
+		if v0-v2 < i32(16) {
+			p4 = t3
+		}
+		p5 := i32(0)
+		if uint32(v0) > uint32(v2) {
+			p5 = p4
+		}
+		v0 = p5 + v0
+		if uint32(v0+v1) > uint32(v2+v4) {
+			goto l1
+		}
 		{
-			t3 := v0
-			v0 = (v0 + v2 - i32(1)) & (i32(0) - v0)
-			p4 := i32(0)
-			if v0-v2 < i32(16) {
-				p4 = t3
-			}
-			p5 := i32(0)
-			if uint32(v0) > uint32(v2) {
-				p5 = p4
-			}
-			v0 = p5 + v0
 			if uint32(v0) <= uint32(v2) {
 				v0 = v3
 				goto l2
 			}
 			t6 := m._tlsf_block_split(v3, v0-v2)
 			v0 = t6
+			if v0 == 0 {
+				goto l1
+			}
 			m._tlsf_block_free(v3)
 		}
 	l2:
@@ -442,6 +465,9 @@ func (m *Module) Xmemalign(v0, v1 int32) int32 {
 			m._tlsf_block_free(v1)
 		}
 		v3 = v0 + i32(4)
+		if v3&i32(15) != 0 {
+			goto l1
+		}
 	}
 l0:
 	return v3
@@ -476,11 +502,11 @@ const (
 )
 
 //go:nosplit
-func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+func load32[T uint32 | uint64](mem []byte, addr T) uint32 {
 	if !unalignedOK {
 		return binary.LittleEndian.Uint32(mem[addr:])
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	val := *(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
 		return bits.ReverseBytes32(val)
@@ -489,7 +515,7 @@ func load32[T uint32 | int64](mem []byte, addr T) uint32 {
 }
 
 //go:nosplit
-func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
+func store32[T uint32 | uint64](mem []byte, addr T, val uint32) {
 	if !unalignedOK {
 		binary.LittleEndian.PutUint32(mem[addr:], val)
 		return
@@ -497,7 +523,7 @@ func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
 	if big {
 		val = bits.ReverseBytes32(val)
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	*(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
@@ -526,19 +552,18 @@ func i32_rotl(x, y int32) int32 {
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }
 
 func memory_copy[T uint32 | uint64](mem []byte, dest, src, n T) {

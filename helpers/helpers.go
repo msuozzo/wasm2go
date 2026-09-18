@@ -432,32 +432,32 @@ func i64_mul_wide_s(x, y int64) (int64, int64) {
 // Multi-byte loads/stores.
 
 //go:nosplit
-func load16[T uint32 | int64](mem []byte, addr T) uint16 {
+func load16[T uint32 | uint64](mem []byte, addr T) uint16 {
 	return binary.LittleEndian.Uint16(mem[addr:])
 }
 
 //go:nosplit
-func store16[T uint32 | int64](mem []byte, addr T, val uint16) {
+func store16[T uint32 | uint64](mem []byte, addr T, val uint16) {
 	binary.LittleEndian.PutUint16(mem[addr:], val)
 }
 
 //go:nosplit
-func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+func load32[T uint32 | uint64](mem []byte, addr T) uint32 {
 	return binary.LittleEndian.Uint32(mem[addr:])
 }
 
 //go:nosplit
-func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
+func store32[T uint32 | uint64](mem []byte, addr T, val uint32) {
 	binary.LittleEndian.PutUint32(mem[addr:], val)
 }
 
 //go:nosplit
-func load64[T uint32 | int64](mem []byte, addr T) uint64 {
+func load64[T uint32 | uint64](mem []byte, addr T) uint64 {
 	return binary.LittleEndian.Uint64(mem[addr:])
 }
 
 //go:nosplit
-func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
+func store64[T uint32 | uint64](mem []byte, addr T, val uint64) {
 	binary.LittleEndian.PutUint64(mem[addr:], val)
 }
 
@@ -465,19 +465,18 @@ func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }
 
 func memory_init[T1, T2 int | uint32 | uint64](mem []byte, data string, dest T1, src, n T2) {
@@ -546,23 +545,23 @@ func table_fill[T int32 | int64](tab []any, dest T, val any, n T) {
 
 func table_grow[T int32 | int64](tab *[]any, val any, delta, max T) T {
 	buf := *tab
-	len := len(buf)
+	old := len(buf)
 	if delta == 0 {
-		return T(len)
+		return T(old)
 	}
-	if new := int64(len) + int64(delta); new < int64(len) ||
-		(max >= 0 && new > int64(max)) {
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
 	buf = append(buf, make([]any, delta)...)
 	if val != nil {
-		cpy := buf[len:]
+		cpy := buf[old:]
 		for i := range cpy {
 			cpy[i] = val
 		}
 	}
 	*tab = buf
-	return T(len)
+	return T(old)
 }
 
 //go:nosplit

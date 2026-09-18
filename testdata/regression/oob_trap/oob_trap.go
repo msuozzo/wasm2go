@@ -5,6 +5,7 @@ package wasm2go
 import (
 	"encoding/binary"
 	"math"
+	"math/bits"
 )
 
 type Module struct {
@@ -44,7 +45,7 @@ func (m *Module) Xld64(v0 int32) int64 {
 	return t0
 }
 func (m *Module) Xld32o(v0 int32) int32 {
-	t0 := int32(load32(m.memory, int64(uint32(v0))+0xffffffff))
+	t0 := int32(load32(m.memory, uint64(uint32(v0))+0xffffffff))
 	return t0
 }
 func (m *Module) Xst32(v0, v1 int32) {
@@ -62,43 +63,42 @@ func (m *Module) Xmemory() Memory {
 }
 
 //go:nosplit
-func load16[T uint32 | int64](mem []byte, addr T) uint16 {
+func load16[T uint32 | uint64](mem []byte, addr T) uint16 {
 	return binary.LittleEndian.Uint16(mem[addr:])
 }
 
 //go:nosplit
-func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+func load32[T uint32 | uint64](mem []byte, addr T) uint32 {
 	return binary.LittleEndian.Uint32(mem[addr:])
 }
 
 //go:nosplit
-func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
+func store32[T uint32 | uint64](mem []byte, addr T, val uint32) {
 	binary.LittleEndian.PutUint32(mem[addr:], val)
 }
 
 //go:nosplit
-func load64[T uint32 | int64](mem []byte, addr T) uint64 {
+func load64[T uint32 | uint64](mem []byte, addr T) uint64 {
 	return binary.LittleEndian.Uint64(mem[addr:])
 }
 
 //go:nosplit
-func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
+func store64[T uint32 | uint64](mem []byte, addr T, val uint64) {
 	binary.LittleEndian.PutUint64(mem[addr:], val)
 }
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }

@@ -54,10 +54,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						v4 = v1&i32(1) | v0 ^ i32(1)
 						v2 = v4 << 3
 						v3 = v2 + i32(65576)
-						t3 := int32(load32(m.memory, int64(uint32(v2))+65584))
+						t3 := int32(load32(m.memory, uint64(uint32(v2))+65584))
 						t4 := v3
 						v0 = t3
-						t5 := int32(load32(m.memory, int64(uint32(v0))+8))
+						t5 := int32(load32(m.memory, uint64(uint32(v0))+8))
 						v1 = t5
 						if t4 == v1 {
 							store32(m.memory, uint32(i32(65536)), uint32(v5&i32_rotl(i32(-2), v4)))
@@ -67,18 +67,18 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						if uint32(v1) < uint32(t6) {
 							goto l1
 						}
-						t7 := int32(load32(m.memory, int64(uint32(v1))+12))
+						t7 := int32(load32(m.memory, uint64(uint32(v1))+12))
 						if t7 != v0 {
 							goto l1
 						}
-						store32(m.memory, int64(uint32(v3))+8, uint32(v1))
-						store32(m.memory, int64(uint32(v1))+12, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+8, uint32(v1))
+						store32(m.memory, uint64(uint32(v1))+12, uint32(v3))
 					}
 				l0:
-					store32(m.memory, int64(uint32(v0))+4, uint32(v2|i32(3)))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(v2|i32(3)))
 					v1 = v0 + v2
-					t8 := int32(load32(m.memory, int64(uint32(v1))+4))
-					store32(m.memory, int64(uint32(v1))+4, uint32(t8|i32(1)))
+					t8 := int32(load32(m.memory, uint64(uint32(v1))+4))
+					store32(m.memory, uint64(uint32(v1))+4, uint32(t8|i32(1)))
 					goto l2
 				}
 				t9 := int32(load32(m.memory, uint32(i32(65544))))
@@ -97,10 +97,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						v4 = p10
 						v2 = v4 << 3
 						v3 = v2 + i32(65576)
-						t11 := int32(load32(m.memory, int64(uint32(v2))+65584))
+						t11 := int32(load32(m.memory, uint64(uint32(v2))+65584))
 						t12 := v3
 						v1 = t11
-						t13 := int32(load32(m.memory, int64(uint32(v1))+8))
+						t13 := int32(load32(m.memory, uint64(uint32(v1))+8))
 						v0 = t13
 						if t12 == v0 {
 							v5 = v5 & i32_rotl(i32(-2), v4)
@@ -111,20 +111,20 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						if uint32(v0) < uint32(t14) {
 							goto l1
 						}
-						t15 := int32(load32(m.memory, int64(uint32(v0))+12))
+						t15 := int32(load32(m.memory, uint64(uint32(v0))+12))
 						if t15 != v1 {
 							goto l1
 						}
-						store32(m.memory, int64(uint32(v3))+8, uint32(v0))
-						store32(m.memory, int64(uint32(v0))+12, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+8, uint32(v0))
+						store32(m.memory, uint64(uint32(v0))+12, uint32(v3))
 					}
 				l4:
-					store32(m.memory, int64(uint32(v1))+4, uint32(v6|i32(3)))
+					store32(m.memory, uint64(uint32(v1))+4, uint32(v6|i32(3)))
 					t16 := v1 + v2
 					v4 = v2 - v6
 					store32(m.memory, uint32(t16), uint32(v4))
 					v6 = v1 + v6
-					store32(m.memory, int64(uint32(v6))+4, uint32(v4|i32(1)))
+					store32(m.memory, uint64(uint32(v6))+4, uint32(v4|i32(1)))
 					if v9 != 0 {
 						v0 = v9&i32(-8) + i32(65576)
 						t17 := int32(load32(m.memory, uint32(i32(65556))))
@@ -136,7 +136,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								v2 = v0
 								goto l5
 							}
-							t18 := int32(load32(m.memory, int64(uint32(v0))+8))
+							t18 := int32(load32(m.memory, uint64(uint32(v0))+8))
 							v2 = t18
 							t19 := int32(load32(m.memory, uint32(i32(65552))))
 							if uint32(v2) < uint32(t19) {
@@ -144,10 +144,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							}
 						}
 					l5:
-						store32(m.memory, int64(uint32(v2))+12, uint32(v3))
-						store32(m.memory, int64(uint32(v0))+8, uint32(v3))
-						store32(m.memory, int64(uint32(v3))+12, uint32(v0))
-						store32(m.memory, int64(uint32(v3))+8, uint32(v2))
+						store32(m.memory, uint64(uint32(v2))+12, uint32(v3))
+						store32(m.memory, uint64(uint32(v0))+8, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+12, uint32(v0))
+						store32(m.memory, uint64(uint32(v3))+8, uint32(v2))
 					}
 					store32(m.memory, uint32(i32(65556)), uint32(v6))
 					store32(m.memory, uint32(i32(65544)), uint32(v4))
@@ -162,17 +162,17 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				if v11&(i32(0)-v11) != 0 {
 					p21 = int32(bits.TrailingZeros32(uint32(v11)))
 				}
-				t22 := int32(load32(m.memory, int64(uint32(p21<<2))+65840))
+				t22 := int32(load32(m.memory, uint64(uint32(p21<<2))+65840))
 				v1 = t22
-				t23 := int32(load32(m.memory, int64(uint32(v1))+4))
+				t23 := int32(load32(m.memory, uint64(uint32(v1))+4))
 				v3 = t23&i32(-8) - v6
 				v4 = v1
 			l7:
 				{
-					t24 := int32(load32(m.memory, int64(uint32(v1))+16))
+					t24 := int32(load32(m.memory, uint64(uint32(v1))+16))
 					v0 = t24
 					if v0 == 0 {
-						t25 := int32(load32(m.memory, int64(uint32(v1))+20))
+						t25 := int32(load32(m.memory, uint64(uint32(v1))+20))
 						v0 = t25
 						if v0 == 0 {
 							t30 := int32(load32(m.memory, uint32(i32(65552))))
@@ -180,38 +180,38 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							if uint32(v8) > uint32(v4) {
 								goto l1
 							}
-							t31 := int32(load32(m.memory, int64(uint32(v4))+24))
+							t31 := int32(load32(m.memory, uint64(uint32(v4))+24))
 							v10 = t31
 							{
-								t32 := int32(load32(m.memory, int64(uint32(v4))+12))
+								t32 := int32(load32(m.memory, uint64(uint32(v4))+12))
 								t33 := v4
 								v0 = t32
 								if t33 != v0 {
-									t34 := int32(load32(m.memory, int64(uint32(v4))+8))
+									t34 := int32(load32(m.memory, uint64(uint32(v4))+8))
 									v1 = t34
 									if uint32(v1) < uint32(v8) {
 										goto l1
 									}
-									t35 := int32(load32(m.memory, int64(uint32(v1))+12))
+									t35 := int32(load32(m.memory, uint64(uint32(v1))+12))
 									if t35 != v4 {
 										goto l1
 									}
-									t36 := int32(load32(m.memory, int64(uint32(v0))+8))
+									t36 := int32(load32(m.memory, uint64(uint32(v0))+8))
 									if t36 != v4 {
 										goto l1
 									}
-									store32(m.memory, int64(uint32(v0))+8, uint32(v1))
-									store32(m.memory, int64(uint32(v1))+12, uint32(v0))
+									store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
+									store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
 									goto l8
 								}
 								{
-									t37 := int32(load32(m.memory, int64(uint32(v4))+20))
+									t37 := int32(load32(m.memory, uint64(uint32(v4))+20))
 									v1 = t37
 									var p38 int32
 									if v1 != 0 {
 										p38 = v4 + i32(20)
 									} else {
-										t39 := int32(load32(m.memory, int64(uint32(v4))+16))
+										t39 := int32(load32(m.memory, uint64(uint32(v4))+16))
 										v1 = t39
 										if v1 == 0 {
 											goto l9
@@ -224,13 +224,13 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										v7 = v2
 										v0 = v1
 										v2 = v0 + i32(20)
-										t40 := int32(load32(m.memory, int64(uint32(v0))+20))
+										t40 := int32(load32(m.memory, uint64(uint32(v0))+20))
 										v1 = t40
 										if v1 != 0 {
 											goto l10
 										}
 										v2 = v0 + i32(16)
-										t41 := int32(load32(m.memory, int64(uint32(v0))+16))
+										t41 := int32(load32(m.memory, uint64(uint32(v0))+16))
 										v1 = t41
 										if v1 != 0 {
 											goto l10
@@ -251,10 +251,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 									goto l11
 								}
 								{
-									t42 := int32(load32(m.memory, int64(uint32(v4))+28))
+									t42 := int32(load32(m.memory, uint64(uint32(v4))+28))
 									v1 = t42
 									v2 = v1 << 2
-									t43 := int32(load32(m.memory, int64(uint32(v2))+65840))
+									t43 := int32(load32(m.memory, uint64(uint32(v2))+65840))
 									if t43 == v4 {
 										store32(m.memory, uint32(v2+i32(65840)), uint32(v0))
 										if v0 != 0 {
@@ -267,12 +267,12 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										goto l1
 									}
 									{
-										t44 := int32(load32(m.memory, int64(uint32(v10))+16))
+										t44 := int32(load32(m.memory, uint64(uint32(v10))+16))
 										if v4 == t44 {
-											store32(m.memory, int64(uint32(v10))+16, uint32(v0))
+											store32(m.memory, uint64(uint32(v10))+16, uint32(v0))
 											goto l13
 										}
-										store32(m.memory, int64(uint32(v10))+20, uint32(v0))
+										store32(m.memory, uint64(uint32(v10))+20, uint32(v0))
 									}
 								l13:
 									if v0 == 0 {
@@ -283,17 +283,17 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								if uint32(v0) < uint32(v8) {
 									goto l1
 								}
-								store32(m.memory, int64(uint32(v0))+24, uint32(v10))
-								t45 := int32(load32(m.memory, int64(uint32(v4))+16))
+								store32(m.memory, uint64(uint32(v0))+24, uint32(v10))
+								t45 := int32(load32(m.memory, uint64(uint32(v4))+16))
 								v1 = t45
 								if v1 != 0 {
 									if uint32(v1) < uint32(v8) {
 										goto l1
 									}
-									store32(m.memory, int64(uint32(v0))+16, uint32(v1))
-									store32(m.memory, int64(uint32(v1))+24, uint32(v0))
+									store32(m.memory, uint64(uint32(v0))+16, uint32(v1))
+									store32(m.memory, uint64(uint32(v1))+24, uint32(v0))
 								}
-								t46 := int32(load32(m.memory, int64(uint32(v4))+20))
+								t46 := int32(load32(m.memory, uint64(uint32(v4))+20))
 								v1 = t46
 								if v1 == 0 {
 									goto l11
@@ -301,22 +301,22 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								if uint32(v1) < uint32(v8) {
 									goto l1
 								}
-								store32(m.memory, int64(uint32(v0))+20, uint32(v1))
-								store32(m.memory, int64(uint32(v1))+24, uint32(v0))
+								store32(m.memory, uint64(uint32(v0))+20, uint32(v1))
+								store32(m.memory, uint64(uint32(v1))+24, uint32(v0))
 							}
 						l11:
 							if uint32(v3) <= uint32(i32(15)) {
 								t47 := v4
 								v0 = v3 | v6
-								store32(m.memory, int64(uint32(t47))+4, uint32(v0|i32(3)))
+								store32(m.memory, uint64(uint32(t47))+4, uint32(v0|i32(3)))
 								v0 = v0 + v4
-								t48 := int32(load32(m.memory, int64(uint32(v0))+4))
-								store32(m.memory, int64(uint32(v0))+4, uint32(t48|i32(1)))
+								t48 := int32(load32(m.memory, uint64(uint32(v0))+4))
+								store32(m.memory, uint64(uint32(v0))+4, uint32(t48|i32(1)))
 								goto l14
 							}
 							v7 = v4 + v6
-							store32(m.memory, int64(uint32(v7))+4, uint32(v3|i32(1)))
-							store32(m.memory, int64(uint32(v4))+4, uint32(v6|i32(3)))
+							store32(m.memory, uint64(uint32(v7))+4, uint32(v3|i32(1)))
+							store32(m.memory, uint64(uint32(v4))+4, uint32(v6|i32(3)))
 							store32(m.memory, uint32(v3+v7), uint32(v3))
 							if v9 != 0 {
 								v0 = v9&i32(-8) + i32(65576)
@@ -329,7 +329,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										v2 = v0
 										goto l15
 									}
-									t50 := int32(load32(m.memory, int64(uint32(v0))+8))
+									t50 := int32(load32(m.memory, uint64(uint32(v0))+8))
 									t51 := v8
 									v2 = t50
 									if uint32(t51) > uint32(v2) {
@@ -337,10 +337,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 									}
 								}
 							l15:
-								store32(m.memory, int64(uint32(v2))+12, uint32(v1))
-								store32(m.memory, int64(uint32(v0))+8, uint32(v1))
-								store32(m.memory, int64(uint32(v1))+12, uint32(v0))
-								store32(m.memory, int64(uint32(v1))+8, uint32(v2))
+								store32(m.memory, uint64(uint32(v2))+12, uint32(v1))
+								store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
+								store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
+								store32(m.memory, uint64(uint32(v1))+8, uint32(v2))
 							}
 							store32(m.memory, uint32(i32(65556)), uint32(v7))
 							store32(m.memory, uint32(i32(65544)), uint32(v3))
@@ -348,7 +348,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							return v4 + i32(8)
 						}
 					}
-					t26 := int32(load32(m.memory, int64(uint32(v0))+4))
+					t26 := int32(load32(m.memory, uint64(uint32(v0))+4))
 					v2 = t26&i32(-8) - v6
 					var p27 int32
 					if uint32(v2) < uint32(v3) {
@@ -395,7 +395,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			v1 = i32(0) - v6
 			{
 				{
-					t54 := int32(load32(m.memory, int64(uint32(v7<<2))+65840))
+					t54 := int32(load32(m.memory, uint64(uint32(v7<<2))+65840))
 					v0 = t54
 					if v0 == 0 {
 						v3 = i32(0)
@@ -411,7 +411,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				l19:
 					{
 						{
-							t57 := int32(load32(m.memory, int64(uint32(v0))+4))
+							t57 := int32(load32(m.memory, uint64(uint32(v0))+4))
 							v5 = t57&i32(-8) - v6
 							if uint32(v5) >= uint32(v1) {
 								goto l17
@@ -425,10 +425,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							goto l20
 						}
 					l17:
-						t58 := int32(load32(m.memory, int64(uint32(v0))+20))
+						t58 := int32(load32(m.memory, uint64(uint32(v0))+20))
 						t59 := v3
 						v5 = t58
-						t60 := int32(load32(m.memory, int64(uint32(v0+int32(uint32(v2)>>29)&i32(4)))+16))
+						t60 := int32(load32(m.memory, uint64(uint32(v0+int32(uint32(v2)>>29)&i32(4)))+16))
 						t61 := v5
 						t62 := v5
 						v0 = t60
@@ -464,13 +464,13 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				if v2&(i32(0)-v2) != 0 {
 					p65 = int32(bits.TrailingZeros32(uint32(v2)))
 				}
-				t66 := int32(load32(m.memory, int64(uint32(p65<<2))+65840))
+				t66 := int32(load32(m.memory, uint64(uint32(p65<<2))+65840))
 				v0 = t66
 			}
 		l20:
 			if v0 != 0 {
 				v2 = v0
-				t67 := int32(load32(m.memory, int64(uint32(v2))+4))
+				t67 := int32(load32(m.memory, uint64(uint32(v2))+4))
 				v3 = t67&i32(-8) - v6
 				var p68 int32
 				if uint32(v3) < uint32(v1) {
@@ -487,12 +487,12 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					p70 = v2
 				}
 				v4 = p70
-				t71 := int32(load32(m.memory, int64(uint32(v2))+16))
+				t71 := int32(load32(m.memory, uint64(uint32(v2))+16))
 				v0 = t71
 				if v0 != 0 {
 					goto l20
 				}
-				t72 := int32(load32(m.memory, int64(uint32(v2))+20))
+				t72 := int32(load32(m.memory, uint64(uint32(v2))+20))
 				v0 = t72
 				goto l20
 			}
@@ -508,38 +508,38 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			if uint32(v7) > uint32(v4) {
 				goto l1
 			}
-			t75 := int32(load32(m.memory, int64(uint32(v4))+24))
+			t75 := int32(load32(m.memory, uint64(uint32(v4))+24))
 			v9 = t75
 			{
-				t76 := int32(load32(m.memory, int64(uint32(v4))+12))
+				t76 := int32(load32(m.memory, uint64(uint32(v4))+12))
 				t77 := v4
 				v0 = t76
 				if t77 != v0 {
-					t78 := int32(load32(m.memory, int64(uint32(v4))+8))
+					t78 := int32(load32(m.memory, uint64(uint32(v4))+8))
 					v2 = t78
 					if uint32(v2) < uint32(v7) {
 						goto l1
 					}
-					t79 := int32(load32(m.memory, int64(uint32(v2))+12))
+					t79 := int32(load32(m.memory, uint64(uint32(v2))+12))
 					if t79 != v4 {
 						goto l1
 					}
-					t80 := int32(load32(m.memory, int64(uint32(v0))+8))
+					t80 := int32(load32(m.memory, uint64(uint32(v0))+8))
 					if t80 != v4 {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v0))+8, uint32(v2))
-					store32(m.memory, int64(uint32(v2))+12, uint32(v0))
+					store32(m.memory, uint64(uint32(v0))+8, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+12, uint32(v0))
 					goto l21
 				}
 				{
-					t81 := int32(load32(m.memory, int64(uint32(v4))+20))
+					t81 := int32(load32(m.memory, uint64(uint32(v4))+20))
 					v3 = t81
 					var p82 int32
 					if v3 != 0 {
 						p82 = v4 + i32(20)
 					} else {
-						t83 := int32(load32(m.memory, int64(uint32(v4))+16))
+						t83 := int32(load32(m.memory, uint64(uint32(v4))+16))
 						v3 = t83
 						if v3 == 0 {
 							goto l22
@@ -552,13 +552,13 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						v5 = v2
 						v0 = v3
 						v2 = v0 + i32(20)
-						t84 := int32(load32(m.memory, int64(uint32(v0))+20))
+						t84 := int32(load32(m.memory, uint64(uint32(v0))+20))
 						v3 = t84
 						if v3 != 0 {
 							goto l23
 						}
 						v2 = v0 + i32(16)
-						t85 := int32(load32(m.memory, int64(uint32(v0))+16))
+						t85 := int32(load32(m.memory, uint64(uint32(v0))+16))
 						v3 = t85
 						if v3 != 0 {
 							goto l23
@@ -579,10 +579,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					goto l24
 				}
 				{
-					t86 := int32(load32(m.memory, int64(uint32(v4))+28))
+					t86 := int32(load32(m.memory, uint64(uint32(v4))+28))
 					v2 = t86
 					v3 = v2 << 2
-					t87 := int32(load32(m.memory, int64(uint32(v3))+65840))
+					t87 := int32(load32(m.memory, uint64(uint32(v3))+65840))
 					if t87 == v4 {
 						store32(m.memory, uint32(v3+i32(65840)), uint32(v0))
 						if v0 != 0 {
@@ -596,12 +596,12 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						goto l1
 					}
 					{
-						t88 := int32(load32(m.memory, int64(uint32(v9))+16))
+						t88 := int32(load32(m.memory, uint64(uint32(v9))+16))
 						if v4 == t88 {
-							store32(m.memory, int64(uint32(v9))+16, uint32(v0))
+							store32(m.memory, uint64(uint32(v9))+16, uint32(v0))
 							goto l26
 						}
-						store32(m.memory, int64(uint32(v9))+20, uint32(v0))
+						store32(m.memory, uint64(uint32(v9))+20, uint32(v0))
 					}
 				l26:
 					if v0 == 0 {
@@ -612,17 +612,17 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				if uint32(v0) < uint32(v7) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v0))+24, uint32(v9))
-				t89 := int32(load32(m.memory, int64(uint32(v4))+16))
+				store32(m.memory, uint64(uint32(v0))+24, uint32(v9))
+				t89 := int32(load32(m.memory, uint64(uint32(v4))+16))
 				v2 = t89
 				if v2 != 0 {
 					if uint32(v2) < uint32(v7) {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v0))+16, uint32(v2))
-					store32(m.memory, int64(uint32(v2))+24, uint32(v0))
+					store32(m.memory, uint64(uint32(v0))+16, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+24, uint32(v0))
 				}
-				t90 := int32(load32(m.memory, int64(uint32(v4))+20))
+				t90 := int32(load32(m.memory, uint64(uint32(v4))+20))
 				v2 = t90
 				if v2 == 0 {
 					goto l24
@@ -630,23 +630,23 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				if uint32(v2) < uint32(v7) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v0))+20, uint32(v2))
-				store32(m.memory, int64(uint32(v2))+24, uint32(v0))
+				store32(m.memory, uint64(uint32(v0))+20, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+24, uint32(v0))
 			}
 		l24:
 			{
 				if uint32(v1) <= uint32(i32(15)) {
 					t91 := v4
 					v0 = v1 | v6
-					store32(m.memory, int64(uint32(t91))+4, uint32(v0|i32(3)))
+					store32(m.memory, uint64(uint32(t91))+4, uint32(v0|i32(3)))
 					v0 = v0 + v4
-					t92 := int32(load32(m.memory, int64(uint32(v0))+4))
-					store32(m.memory, int64(uint32(v0))+4, uint32(t92|i32(1)))
+					t92 := int32(load32(m.memory, uint64(uint32(v0))+4))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(t92|i32(1)))
 					goto l27
 				}
 				v5 = v4 + v6
-				store32(m.memory, int64(uint32(v5))+4, uint32(v1|i32(1)))
-				store32(m.memory, int64(uint32(v4))+4, uint32(v6|i32(3)))
+				store32(m.memory, uint64(uint32(v5))+4, uint32(v1|i32(1)))
+				store32(m.memory, uint64(uint32(v4))+4, uint32(v6|i32(3)))
 				store32(m.memory, uint32(v1+v5), uint32(v1))
 				if uint32(v1) <= uint32(i32(255)) {
 					v0 = v1&i32(248) + i32(65576)
@@ -660,7 +660,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							v3 = v0
 							goto l28
 						}
-						t95 := int32(load32(m.memory, int64(uint32(v0))+8))
+						t95 := int32(load32(m.memory, uint64(uint32(v0))+8))
 						t96 := v7
 						v3 = t95
 						if uint32(t96) > uint32(v3) {
@@ -668,10 +668,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						}
 					}
 				l28:
-					store32(m.memory, int64(uint32(v3))+12, uint32(v5))
-					store32(m.memory, int64(uint32(v0))+8, uint32(v5))
-					store32(m.memory, int64(uint32(v5))+12, uint32(v0))
-					store32(m.memory, int64(uint32(v5))+8, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+12, uint32(v5))
+					store32(m.memory, uint64(uint32(v0))+8, uint32(v5))
+					store32(m.memory, uint64(uint32(v5))+12, uint32(v0))
+					store32(m.memory, uint64(uint32(v5))+8, uint32(v3))
 					goto l27
 				}
 				v0 = i32(31)
@@ -686,16 +686,16 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					v0 = int32(uint32(i32_shl(v6, v3))>>15) - (v0 | v2 | v3)
 					v0 = i32_shr_u(t97, v0+i32(21))&i32(1) | v0<<1 + i32(28)
 				}
-				store32(m.memory, int64(uint32(v5))+28, uint32(v0))
-				store64(m.memory, int64(uint32(v5))+16, uint64(i64(0)))
+				store32(m.memory, uint64(uint32(v5))+28, uint32(v0))
+				store64(m.memory, uint64(uint32(v5))+16, uint64(i64(0)))
 				v2 = v0<<2 + i32(65840)
 				v3 = i32_shl(i32(1), v0)
 				if v3&v8 == 0 {
 					store32(m.memory, uint32(v2), uint32(v5))
 					store32(m.memory, uint32(i32(65540)), uint32(v3|v8))
-					store32(m.memory, int64(uint32(v5))+24, uint32(v2))
-					store32(m.memory, int64(uint32(v5))+8, uint32(v5))
-					store32(m.memory, int64(uint32(v5))+12, uint32(v5))
+					store32(m.memory, uint64(uint32(v5))+24, uint32(v2))
+					store32(m.memory, uint64(uint32(v5))+8, uint32(v5))
+					store32(m.memory, uint64(uint32(v5))+12, uint32(v5))
 					goto l27
 				}
 				t99 := v1
@@ -709,14 +709,14 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			l30:
 				{
 					v2 = v6
-					t101 := int32(load32(m.memory, int64(uint32(v2))+4))
+					t101 := int32(load32(m.memory, uint64(uint32(v2))+4))
 					if t101&i32(-8) == v1 {
 						goto l29
 					}
 					v3 = int32(uint32(v0) >> 29)
 					v0 = v0 << 1
 					v3 = v2 + v3&i32(4)
-					t102 := int32(load32(m.memory, int64(uint32(v3))+16))
+					t102 := int32(load32(m.memory, uint64(uint32(v3))+16))
 					v6 = t102
 					if v6 != 0 {
 						goto l30
@@ -727,24 +727,24 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					goto l1
 				}
 				store32(m.memory, uint32(v0), uint32(v5))
-				store32(m.memory, int64(uint32(v5))+24, uint32(v2))
-				store32(m.memory, int64(uint32(v5))+12, uint32(v5))
-				store32(m.memory, int64(uint32(v5))+8, uint32(v5))
+				store32(m.memory, uint64(uint32(v5))+24, uint32(v2))
+				store32(m.memory, uint64(uint32(v5))+12, uint32(v5))
+				store32(m.memory, uint64(uint32(v5))+8, uint32(v5))
 				goto l27
 			l29:
 				if uint32(v2) < uint32(v7) {
 					goto l1
 				}
-				t103 := int32(load32(m.memory, int64(uint32(v2))+8))
+				t103 := int32(load32(m.memory, uint64(uint32(v2))+8))
 				v0 = t103
 				if uint32(v0) < uint32(v7) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v2))+8, uint32(v5))
-				store32(m.memory, int64(uint32(v0))+12, uint32(v5))
-				store32(m.memory, int64(uint32(v5))+24, uint32(i32(0)))
-				store32(m.memory, int64(uint32(v5))+8, uint32(v0))
-				store32(m.memory, int64(uint32(v5))+12, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+8, uint32(v5))
+				store32(m.memory, uint64(uint32(v0))+12, uint32(v5))
+				store32(m.memory, uint64(uint32(v5))+24, uint32(i32(0)))
+				store32(m.memory, uint64(uint32(v5))+8, uint32(v0))
+				store32(m.memory, uint64(uint32(v5))+12, uint32(v2))
 			}
 		l27:
 			return v4 + i32(8)
@@ -759,15 +759,15 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				v1 = v2 - v6
 				if uint32(v1) >= uint32(i32(16)) {
 					v4 = v0 + v6
-					store32(m.memory, int64(uint32(v4))+4, uint32(v1|i32(1)))
+					store32(m.memory, uint64(uint32(v4))+4, uint32(v1|i32(1)))
 					store32(m.memory, uint32(v0+v2), uint32(v1))
-					store32(m.memory, int64(uint32(v0))+4, uint32(v6|i32(3)))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(v6|i32(3)))
 					goto l31
 				}
-				store32(m.memory, int64(uint32(v0))+4, uint32(v2|i32(3)))
+				store32(m.memory, uint64(uint32(v0))+4, uint32(v2|i32(3)))
 				v1 = v0 + v2
-				t106 := int32(load32(m.memory, int64(uint32(v1))+4))
-				store32(m.memory, int64(uint32(v1))+4, uint32(t106|i32(1)))
+				t106 := int32(load32(m.memory, uint64(uint32(v1))+4))
+				store32(m.memory, uint64(uint32(v1))+4, uint32(t106|i32(1)))
 				v1 = i32(0)
 				v4 = i32(0)
 			}
@@ -785,10 +785,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			v2 = t109 + v0
 			t110 := v2
 			v1 = v1 - v6
-			store32(m.memory, int64(uint32(t110))+4, uint32(v1|i32(1)))
+			store32(m.memory, uint64(uint32(t110))+4, uint32(v1|i32(1)))
 			store32(m.memory, uint32(i32(65548)), uint32(v1))
 			store32(m.memory, uint32(i32(65560)), uint32(v2))
-			store32(m.memory, int64(uint32(v0))+4, uint32(v6|i32(3)))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v6|i32(3)))
 			goto l2
 		}
 		v0 = i32(0)
@@ -888,7 +888,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						t126 := m._sbrk(v2)
 						v1 = t126
 						t127 := int32(load32(m.memory, uint32(v4)))
-						t128 := int32(load32(m.memory, int64(uint32(v4))+4))
+						t128 := int32(load32(m.memory, uint64(uint32(v4))+4))
 						if v1 != t127+t128 {
 							v5 = v1
 							goto l34
@@ -976,11 +976,11 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							}
 							t138 := int32(load32(m.memory, uint32(v0)))
 							v3 = t138
-							t139 := int32(load32(m.memory, int64(uint32(v0))+4))
+							t139 := int32(load32(m.memory, uint64(uint32(v0))+4))
 							t140 := v3
 							v4 = t139
 							if t140+v4 != v1 {
-								t141 := int32(load32(m.memory, int64(uint32(v0))+8))
+								t141 := int32(load32(m.memory, uint64(uint32(v0))+8))
 								v0 = t141
 								goto l40
 							}
@@ -991,11 +991,11 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						if uint32(v3) > uint32(v5) {
 							goto l39
 						}
-						t142 := int32(load32(m.memory, int64(uint32(v0))+12))
+						t142 := int32(load32(m.memory, uint64(uint32(v0))+12))
 						if t142&i32(8) != 0 {
 							goto l39
 						}
-						store32(m.memory, int64(uint32(v0))+4, uint32(v2+v4))
+						store32(m.memory, uint64(uint32(v0))+4, uint32(v2+v4))
 						t143 := int32(load32(m.memory, uint32(i32(65548))))
 						m._init_top(v5, t143+v2)
 						goto l41
@@ -1050,20 +1050,20 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						t150 := int32(load32(m.memory, uint32(v0)))
 						v3 = t150
 						if v3 != v7 {
-							t151 := int32(load32(m.memory, int64(uint32(v0))+8))
+							t151 := int32(load32(m.memory, uint64(uint32(v0))+8))
 							v0 = t151
 							goto l44
 						}
 					}
-					t152 := int32(m.memory[int64(uint32(v0))+12])
+					t152 := int32(m.memory[uint64(uint32(v0))+12])
 					if t152&i32(8) != 0 {
 						goto l43
 					}
 					store32(m.memory, uint32(v0), uint32(v1))
-					t153 := int32(load32(m.memory, int64(uint32(v0))+4))
-					store32(m.memory, int64(uint32(v0))+4, uint32(t153+v2))
+					t153 := int32(load32(m.memory, uint64(uint32(v0))+4))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(t153+v2))
 					v10 = v1 + (i32(-8)-v1)&i32(15)
-					store32(m.memory, int64(uint32(v10))+4, uint32(v6|i32(3)))
+					store32(m.memory, uint64(uint32(v10))+4, uint32(v6|i32(3)))
 					v2 = v3 + (i32(-8)-v3)&i32(15)
 					t154 := v2
 					v7 = v6 + v10
@@ -1074,7 +1074,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							t155 := int32(load32(m.memory, uint32(i32(65548))))
 							v0 = t155 + v3
 							store32(m.memory, uint32(i32(65548)), uint32(v0))
-							store32(m.memory, int64(uint32(v7))+4, uint32(v0|i32(1)))
+							store32(m.memory, uint64(uint32(v7))+4, uint32(v0|i32(1)))
 							goto l45
 						}
 						t156 := int32(load32(m.memory, uint32(i32(65556))))
@@ -1083,18 +1083,18 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							t157 := int32(load32(m.memory, uint32(i32(65544))))
 							v0 = t157 + v3
 							store32(m.memory, uint32(i32(65544)), uint32(v0))
-							store32(m.memory, int64(uint32(v7))+4, uint32(v0|i32(1)))
+							store32(m.memory, uint64(uint32(v7))+4, uint32(v0|i32(1)))
 							store32(m.memory, uint32(v0+v7), uint32(v0))
 							goto l45
 						}
-						t158 := int32(load32(m.memory, int64(uint32(v2))+4))
+						t158 := int32(load32(m.memory, uint64(uint32(v2))+4))
 						v8 = t158
 						if v8&i32(3) == i32(1) {
-							t159 := int32(load32(m.memory, int64(uint32(v2))+12))
+							t159 := int32(load32(m.memory, uint64(uint32(v2))+12))
 							v0 = t159
 							{
 								if uint32(v8) <= uint32(i32(255)) {
-									t160 := int32(load32(m.memory, int64(uint32(v2))+8))
+									t160 := int32(load32(m.memory, uint64(uint32(v2))+8))
 									v1 = t160
 									t161 := v1
 									v6 = v8&i32(248) + i32(65576)
@@ -1102,7 +1102,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										if uint32(v1) < uint32(v4) {
 											goto l1
 										}
-										t162 := int32(load32(m.memory, int64(uint32(v1))+12))
+										t162 := int32(load32(m.memory, uint64(uint32(v1))+12))
 										if t162 != v2 {
 											goto l1
 										}
@@ -1116,43 +1116,43 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										if uint32(v0) < uint32(v4) {
 											goto l1
 										}
-										t164 := int32(load32(m.memory, int64(uint32(v0))+8))
+										t164 := int32(load32(m.memory, uint64(uint32(v0))+8))
 										if t164 != v2 {
 											goto l1
 										}
 									}
-									store32(m.memory, int64(uint32(v0))+8, uint32(v1))
-									store32(m.memory, int64(uint32(v1))+12, uint32(v0))
+									store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
+									store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
 									goto l46
 								}
-								t165 := int32(load32(m.memory, int64(uint32(v2))+24))
+								t165 := int32(load32(m.memory, uint64(uint32(v2))+24))
 								v9 = t165
 								if v0 != v2 {
-									t166 := int32(load32(m.memory, int64(uint32(v2))+8))
+									t166 := int32(load32(m.memory, uint64(uint32(v2))+8))
 									v1 = t166
 									if uint32(v1) < uint32(v4) {
 										goto l1
 									}
-									t167 := int32(load32(m.memory, int64(uint32(v1))+12))
+									t167 := int32(load32(m.memory, uint64(uint32(v1))+12))
 									if t167 != v2 {
 										goto l1
 									}
-									t168 := int32(load32(m.memory, int64(uint32(v0))+8))
+									t168 := int32(load32(m.memory, uint64(uint32(v0))+8))
 									if t168 != v2 {
 										goto l1
 									}
-									store32(m.memory, int64(uint32(v0))+8, uint32(v1))
-									store32(m.memory, int64(uint32(v1))+12, uint32(v0))
+									store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
+									store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
 									goto l47
 								}
 								{
-									t169 := int32(load32(m.memory, int64(uint32(v2))+20))
+									t169 := int32(load32(m.memory, uint64(uint32(v2))+20))
 									v1 = t169
 									var p170 int32
 									if v1 != 0 {
 										p170 = v2 + i32(20)
 									} else {
-										t171 := int32(load32(m.memory, int64(uint32(v2))+16))
+										t171 := int32(load32(m.memory, uint64(uint32(v2))+16))
 										v1 = t171
 										if v1 == 0 {
 											goto l48
@@ -1165,13 +1165,13 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										v5 = v6
 										v0 = v1
 										v6 = v0 + i32(20)
-										t172 := int32(load32(m.memory, int64(uint32(v0))+20))
+										t172 := int32(load32(m.memory, uint64(uint32(v0))+20))
 										v1 = t172
 										if v1 != 0 {
 											goto l49
 										}
 										v6 = v0 + i32(16)
-										t173 := int32(load32(m.memory, int64(uint32(v0))+16))
+										t173 := int32(load32(m.memory, uint64(uint32(v0))+16))
 										v1 = t173
 										if v1 != 0 {
 											goto l49
@@ -1190,10 +1190,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 									goto l46
 								}
 								{
-									t174 := int32(load32(m.memory, int64(uint32(v2))+28))
+									t174 := int32(load32(m.memory, uint64(uint32(v2))+28))
 									v1 = t174
 									v6 = v1 << 2
-									t175 := int32(load32(m.memory, int64(uint32(v6))+65840))
+									t175 := int32(load32(m.memory, uint64(uint32(v6))+65840))
 									if t175 == v2 {
 										store32(m.memory, uint32(v6+i32(65840)), uint32(v0))
 										if v0 != 0 {
@@ -1207,12 +1207,12 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 										goto l1
 									}
 									{
-										t177 := int32(load32(m.memory, int64(uint32(v9))+16))
+										t177 := int32(load32(m.memory, uint64(uint32(v9))+16))
 										if v2 == t177 {
-											store32(m.memory, int64(uint32(v9))+16, uint32(v0))
+											store32(m.memory, uint64(uint32(v9))+16, uint32(v0))
 											goto l51
 										}
-										store32(m.memory, int64(uint32(v9))+20, uint32(v0))
+										store32(m.memory, uint64(uint32(v9))+20, uint32(v0))
 									}
 								l51:
 									if v0 == 0 {
@@ -1223,17 +1223,17 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								if uint32(v0) < uint32(v4) {
 									goto l1
 								}
-								store32(m.memory, int64(uint32(v0))+24, uint32(v9))
-								t178 := int32(load32(m.memory, int64(uint32(v2))+16))
+								store32(m.memory, uint64(uint32(v0))+24, uint32(v9))
+								t178 := int32(load32(m.memory, uint64(uint32(v2))+16))
 								v1 = t178
 								if v1 != 0 {
 									if uint32(v1) < uint32(v4) {
 										goto l1
 									}
-									store32(m.memory, int64(uint32(v0))+16, uint32(v1))
-									store32(m.memory, int64(uint32(v1))+24, uint32(v0))
+									store32(m.memory, uint64(uint32(v0))+16, uint32(v1))
+									store32(m.memory, uint64(uint32(v1))+24, uint32(v0))
 								}
-								t179 := int32(load32(m.memory, int64(uint32(v2))+20))
+								t179 := int32(load32(m.memory, uint64(uint32(v2))+20))
 								v1 = t179
 								if v1 == 0 {
 									goto l46
@@ -1241,19 +1241,19 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								if uint32(v1) < uint32(v4) {
 									goto l1
 								}
-								store32(m.memory, int64(uint32(v0))+20, uint32(v1))
-								store32(m.memory, int64(uint32(v1))+24, uint32(v0))
+								store32(m.memory, uint64(uint32(v0))+20, uint32(v1))
+								store32(m.memory, uint64(uint32(v1))+24, uint32(v0))
 							}
 						l46:
 							v0 = v8 & i32(-8)
 							v3 = v0 + v3
 							v2 = v0 + v2
-							t180 := int32(load32(m.memory, int64(uint32(v2))+4))
+							t180 := int32(load32(m.memory, uint64(uint32(v2))+4))
 							v8 = t180
 						}
-						store32(m.memory, int64(uint32(v2))+4, uint32(v8&i32(-2)))
+						store32(m.memory, uint64(uint32(v2))+4, uint32(v8&i32(-2)))
 						store32(m.memory, uint32(v3+v7), uint32(v3))
-						store32(m.memory, int64(uint32(v7))+4, uint32(v3|i32(1)))
+						store32(m.memory, uint64(uint32(v7))+4, uint32(v3|i32(1)))
 						if uint32(v3) <= uint32(i32(255)) {
 							v0 = v3&i32(248) + i32(65576)
 							{
@@ -1266,7 +1266,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 									v3 = v0
 									goto l52
 								}
-								t183 := int32(load32(m.memory, int64(uint32(v0))+8))
+								t183 := int32(load32(m.memory, uint64(uint32(v0))+8))
 								t184 := v4
 								v3 = t183
 								if uint32(t184) > uint32(v3) {
@@ -1274,10 +1274,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								}
 							}
 						l52:
-							store32(m.memory, int64(uint32(v3))+12, uint32(v7))
-							store32(m.memory, int64(uint32(v0))+8, uint32(v7))
-							store32(m.memory, int64(uint32(v7))+12, uint32(v0))
-							store32(m.memory, int64(uint32(v7))+8, uint32(v3))
+							store32(m.memory, uint64(uint32(v3))+12, uint32(v7))
+							store32(m.memory, uint64(uint32(v0))+8, uint32(v7))
+							store32(m.memory, uint64(uint32(v7))+12, uint32(v0))
+							store32(m.memory, uint64(uint32(v7))+8, uint32(v3))
 							goto l45
 						}
 						v0 = i32(31)
@@ -1292,8 +1292,8 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							v0 = int32(uint32(i32_shl(v6, v2))>>15) - (v0 | v1 | v2)
 							v0 = i32_shr_u(t185, v0+i32(21))&i32(1) | v0<<1 + i32(28)
 						}
-						store32(m.memory, int64(uint32(v7))+28, uint32(v0))
-						store64(m.memory, int64(uint32(v7))+16, uint64(i64(0)))
+						store32(m.memory, uint64(uint32(v7))+28, uint32(v0))
+						store64(m.memory, uint64(uint32(v7))+16, uint64(i64(0)))
 						v1 = v0<<2 + i32(65840)
 						t186 := int32(load32(m.memory, uint32(i32(65540))))
 						v2 = t186
@@ -1302,9 +1302,9 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						if t187&v6 == 0 {
 							store32(m.memory, uint32(v1), uint32(v7))
 							store32(m.memory, uint32(i32(65540)), uint32(v2|v6))
-							store32(m.memory, int64(uint32(v7))+24, uint32(v1))
-							store32(m.memory, int64(uint32(v7))+8, uint32(v7))
-							store32(m.memory, int64(uint32(v7))+12, uint32(v7))
+							store32(m.memory, uint64(uint32(v7))+24, uint32(v1))
+							store32(m.memory, uint64(uint32(v7))+8, uint32(v7))
+							store32(m.memory, uint64(uint32(v7))+12, uint32(v7))
 							goto l45
 						}
 						t189 := v3
@@ -1318,14 +1318,14 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					l54:
 						{
 							v1 = v6
-							t191 := int32(load32(m.memory, int64(uint32(v1))+4))
+							t191 := int32(load32(m.memory, uint64(uint32(v1))+4))
 							if t191&i32(-8) == v3 {
 								goto l53
 							}
 							v2 = int32(uint32(v0) >> 29)
 							v0 = v0 << 1
 							v2 = v1 + v2&i32(4)
-							t192 := int32(load32(m.memory, int64(uint32(v2))+16))
+							t192 := int32(load32(m.memory, uint64(uint32(v2))+16))
 							v6 = t192
 							if v6 != 0 {
 								goto l54
@@ -1336,24 +1336,24 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							goto l1
 						}
 						store32(m.memory, uint32(v0), uint32(v7))
-						store32(m.memory, int64(uint32(v7))+24, uint32(v1))
-						store32(m.memory, int64(uint32(v7))+12, uint32(v7))
-						store32(m.memory, int64(uint32(v7))+8, uint32(v7))
+						store32(m.memory, uint64(uint32(v7))+24, uint32(v1))
+						store32(m.memory, uint64(uint32(v7))+12, uint32(v7))
+						store32(m.memory, uint64(uint32(v7))+8, uint32(v7))
 						goto l45
 					l53:
 						if uint32(v1) < uint32(v4) {
 							goto l1
 						}
-						t193 := int32(load32(m.memory, int64(uint32(v1))+8))
+						t193 := int32(load32(m.memory, uint64(uint32(v1))+8))
 						v0 = t193
 						if uint32(v0) < uint32(v4) {
 							goto l1
 						}
-						store32(m.memory, int64(uint32(v1))+8, uint32(v7))
-						store32(m.memory, int64(uint32(v0))+12, uint32(v7))
-						store32(m.memory, int64(uint32(v7))+24, uint32(i32(0)))
-						store32(m.memory, int64(uint32(v7))+8, uint32(v0))
-						store32(m.memory, int64(uint32(v7))+12, uint32(v1))
+						store32(m.memory, uint64(uint32(v1))+8, uint32(v7))
+						store32(m.memory, uint64(uint32(v0))+12, uint32(v7))
+						store32(m.memory, uint64(uint32(v7))+24, uint32(i32(0)))
+						store32(m.memory, uint64(uint32(v7))+8, uint32(v0))
+						store32(m.memory, uint64(uint32(v7))+12, uint32(v1))
 					}
 				l45:
 					return v10 + i32(8)
@@ -1361,7 +1361,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			l43:
 				t194 := m._segment_holding(v5)
 				v0 = t194
-				t195 := int32(load32(m.memory, int64(uint32(v0))+4))
+				t195 := int32(load32(m.memory, uint64(uint32(v0))+4))
 				v3 = t195
 				t196 := int32(load32(m.memory, uint32(v0)))
 				v0 = t196
@@ -1374,11 +1374,11 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					p198 = t197
 				}
 				v3 = p198
-				store32(m.memory, int64(uint32(v3))+4, uint32(i32(35)))
+				store32(m.memory, uint64(uint32(v3))+4, uint32(i32(35)))
 				t199 := int64(load64(m.memory, uint32(i32(65992))))
-				store64(m.memory, int64(uint32(v3))+16, uint64(t199))
+				store64(m.memory, uint64(uint32(v3))+16, uint64(t199))
 				t200 := int64(load64(m.memory, uint32(i32(65984))))
-				store64(m.memory, int64(uint32(v3))+8, uint64(t200))
+				store64(m.memory, uint64(uint32(v3))+8, uint64(t200))
 				store32(m.memory, uint32(i32(65992)), uint32(v3+i32(8)))
 				store32(m.memory, uint32(i32(65988)), uint32(v2))
 				store32(m.memory, uint32(i32(65984)), uint32(v1))
@@ -1396,12 +1396,12 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 				if v3 == v5 {
 					goto l41
 				}
-				t202 := int32(load32(m.memory, int64(uint32(v3))+4))
-				store32(m.memory, int64(uint32(v3))+4, uint32(t202&i32(-2)))
+				t202 := int32(load32(m.memory, uint64(uint32(v3))+4))
+				store32(m.memory, uint64(uint32(v3))+4, uint32(t202&i32(-2)))
 				t203 := v3
 				v1 = v3 - v5
 				store32(m.memory, uint32(t203), uint32(v1))
-				store32(m.memory, int64(uint32(v5))+4, uint32(v1|i32(1)))
+				store32(m.memory, uint64(uint32(v5))+4, uint32(v1|i32(1)))
 				var p204 int32
 				{
 					if uint32(v1) <= uint32(i32(255)) {
@@ -1416,7 +1416,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 								v3 = v0
 								goto l56
 							}
-							t207 := int32(load32(m.memory, int64(uint32(v0))+8))
+							t207 := int32(load32(m.memory, uint64(uint32(v0))+8))
 							v3 = t207
 							t208 := int32(load32(m.memory, uint32(i32(65552))))
 							if uint32(v3) < uint32(t208) {
@@ -1424,8 +1424,8 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 							}
 						}
 					l56:
-						store32(m.memory, int64(uint32(v3))+12, uint32(v5))
-						store32(m.memory, int64(uint32(v0))+8, uint32(v5))
+						store32(m.memory, uint64(uint32(v3))+12, uint32(v5))
+						store32(m.memory, uint64(uint32(v0))+8, uint32(v5))
 						v4 = i32(8)
 						p204 = i32(12)
 						goto l57
@@ -1442,8 +1442,8 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						v0 = int32(uint32(i32_shl(v4, v3))>>15) - (v0 | v2 | v3)
 						v0 = i32_shr_u(t209, v0+i32(21))&i32(1) | v0<<1 + i32(28)
 					}
-					store32(m.memory, int64(uint32(v5))+28, uint32(v0))
-					store64(m.memory, int64(uint32(v5))+16, uint64(i64(0)))
+					store32(m.memory, uint64(uint32(v5))+28, uint32(v0))
+					store64(m.memory, uint64(uint32(v5))+16, uint64(i64(0)))
 					v3 = v0<<2 + i32(65840)
 					{
 						t210 := int32(load32(m.memory, uint32(i32(65540))))
@@ -1466,14 +1466,14 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					l60:
 						{
 							v3 = v4
-							t215 := int32(load32(m.memory, int64(uint32(v3))+4))
+							t215 := int32(load32(m.memory, uint64(uint32(v3))+4))
 							if t215&i32(-8) == v1 {
 								goto l59
 							}
 							v2 = int32(uint32(v0) >> 29)
 							v0 = v0 << 1
 							v2 = v3 + v2&i32(4)
-							t216 := int32(load32(m.memory, int64(uint32(v2))+16))
+							t216 := int32(load32(m.memory, uint64(uint32(v2))+16))
 							v4 = t216
 							if v4 != 0 {
 								goto l60
@@ -1487,7 +1487,7 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 						store32(m.memory, uint32(v0), uint32(v5))
 					}
 				l58:
-					store32(m.memory, int64(uint32(v5))+24, uint32(v3))
+					store32(m.memory, uint64(uint32(v5))+24, uint32(v3))
 					v4 = i32(12)
 					v3 = v5
 					v0 = v3
@@ -1499,15 +1499,15 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 					if uint32(v0) > uint32(v3) {
 						goto l1
 					}
-					t219 := int32(load32(m.memory, int64(uint32(v3))+8))
+					t219 := int32(load32(m.memory, uint64(uint32(v3))+8))
 					t220 := v0
 					v0 = t219
 					if uint32(t220) > uint32(v0) {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v3))+8, uint32(v5))
-					store32(m.memory, int64(uint32(v0))+12, uint32(v5))
-					store32(m.memory, int64(uint32(v5))+8, uint32(v0))
+					store32(m.memory, uint64(uint32(v3))+8, uint32(v5))
+					store32(m.memory, uint64(uint32(v0))+12, uint32(v5))
+					store32(m.memory, uint64(uint32(v5))+8, uint32(v0))
 					v0 = i32(0)
 					v4 = i32(12)
 					p204 = i32(24)
@@ -1528,10 +1528,10 @@ func (m *Module) Xmalloc(v0 int32) int32 {
 			v2 = v0 + v6
 			t223 := v2
 			v1 = v1 - v6
-			store32(m.memory, int64(uint32(t223))+4, uint32(v1|i32(1)))
+			store32(m.memory, uint64(uint32(t223))+4, uint32(v1|i32(1)))
 			store32(m.memory, uint32(i32(65548)), uint32(v1))
 			store32(m.memory, uint32(i32(65560)), uint32(v2))
-			store32(m.memory, int64(uint32(v0))+4, uint32(v6|i32(3)))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v6|i32(3)))
 			v0 = v0 + i32(8)
 		}
 	l32:
@@ -1550,12 +1550,12 @@ l1:
 		t0 := int32(load32(m.memory, uint32(v1)))
 		v2 = t0
 		if uint32(v2) <= uint32(v0) {
-			t1 := int32(load32(m.memory, int64(uint32(v1))+4))
+			t1 := int32(load32(m.memory, uint64(uint32(v1))+4))
 			if uint32(v0) < uint32(v2+t1) {
 				goto l0
 			}
 		}
-		t2 := int32(load32(m.memory, int64(uint32(v1))+8))
+		t2 := int32(load32(m.memory, uint64(uint32(v1))+8))
 		v1 = t2
 		if v1 != 0 {
 			goto l1
@@ -1571,12 +1571,12 @@ func (m *Module) _init_top(v0, v1 int32) {
 	v3 = v2 + v0
 	t0 := v3
 	v2 = v1 - v2
-	store32(m.memory, int64(uint32(t0))+4, uint32(v2|i32(1)))
+	store32(m.memory, uint64(uint32(t0))+4, uint32(v2|i32(1)))
 	t1 := int32(load32(m.memory, uint32(i32(66024))))
 	store32(m.memory, uint32(i32(65564)), uint32(t1))
 	store32(m.memory, uint32(i32(65548)), uint32(v2))
 	store32(m.memory, uint32(i32(65560)), uint32(v3))
-	store32(m.memory, int64(uint32(v0+v1))+4, uint32(i32(56)))
+	store32(m.memory, uint64(uint32(v0+v1))+4, uint32(i32(56)))
 }
 func (m *Module) Xfree(v0 int32) {
 	var v1, v2, v3, v4, v5, v6, v7, v8, v9, v10 int32
@@ -1617,10 +1617,10 @@ func (m *Module) Xfree(v0 int32) {
 			v0 = v0 + v4
 			t7 := int32(load32(m.memory, uint32(i32(65556))))
 			if t7 != v3 {
-				t8 := int32(load32(m.memory, int64(uint32(v3))+12))
+				t8 := int32(load32(m.memory, uint64(uint32(v3))+12))
 				v2 = t8
 				if uint32(v4) <= uint32(i32(255)) {
-					t9 := int32(load32(m.memory, int64(uint32(v3))+8))
+					t9 := int32(load32(m.memory, uint64(uint32(v3))+8))
 					v1 = t9
 					t10 := v1
 					v7 = v4&i32(248) + i32(65576)
@@ -1628,7 +1628,7 @@ func (m *Module) Xfree(v0 int32) {
 						if uint32(v1) < uint32(v6) {
 							goto l1
 						}
-						t11 := int32(load32(m.memory, int64(uint32(v1))+12))
+						t11 := int32(load32(m.memory, uint64(uint32(v1))+12))
 						if t11 != v3 {
 							goto l1
 						}
@@ -1642,43 +1642,43 @@ func (m *Module) Xfree(v0 int32) {
 						if uint32(v2) < uint32(v6) {
 							goto l1
 						}
-						t13 := int32(load32(m.memory, int64(uint32(v2))+8))
+						t13 := int32(load32(m.memory, uint64(uint32(v2))+8))
 						if t13 != v3 {
 							goto l1
 						}
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+12, uint32(v2))
 					goto l2
 				}
-				t14 := int32(load32(m.memory, int64(uint32(v3))+24))
+				t14 := int32(load32(m.memory, uint64(uint32(v3))+24))
 				v8 = t14
 				if v2 != v3 {
-					t15 := int32(load32(m.memory, int64(uint32(v3))+8))
+					t15 := int32(load32(m.memory, uint64(uint32(v3))+8))
 					v1 = t15
 					if uint32(v1) < uint32(v6) {
 						goto l1
 					}
-					t16 := int32(load32(m.memory, int64(uint32(v1))+12))
+					t16 := int32(load32(m.memory, uint64(uint32(v1))+12))
 					if t16 != v3 {
 						goto l1
 					}
-					t17 := int32(load32(m.memory, int64(uint32(v2))+8))
+					t17 := int32(load32(m.memory, uint64(uint32(v2))+8))
 					if t17 != v3 {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+12, uint32(v2))
 					goto l3
 				}
 				{
-					t18 := int32(load32(m.memory, int64(uint32(v3))+20))
+					t18 := int32(load32(m.memory, uint64(uint32(v3))+20))
 					v1 = t18
 					var p19 int32
 					if v1 != 0 {
 						p19 = v3 + i32(20)
 					} else {
-						t20 := int32(load32(m.memory, int64(uint32(v3))+16))
+						t20 := int32(load32(m.memory, uint64(uint32(v3))+16))
 						v1 = t20
 						if v1 == 0 {
 							goto l4
@@ -1691,13 +1691,13 @@ func (m *Module) Xfree(v0 int32) {
 						v7 = v4
 						v2 = v1
 						v4 = v2 + i32(20)
-						t21 := int32(load32(m.memory, int64(uint32(v2))+20))
+						t21 := int32(load32(m.memory, uint64(uint32(v2))+20))
 						v1 = t21
 						if v1 != 0 {
 							goto l5
 						}
 						v4 = v2 + i32(16)
-						t22 := int32(load32(m.memory, int64(uint32(v2))+16))
+						t22 := int32(load32(m.memory, uint64(uint32(v2))+16))
 						v1 = t22
 						if v1 != 0 {
 							goto l5
@@ -1716,10 +1716,10 @@ func (m *Module) Xfree(v0 int32) {
 					goto l2
 				}
 				{
-					t23 := int32(load32(m.memory, int64(uint32(v3))+28))
+					t23 := int32(load32(m.memory, uint64(uint32(v3))+28))
 					v1 = t23
 					v4 = v1 << 2
-					t24 := int32(load32(m.memory, int64(uint32(v4))+65840))
+					t24 := int32(load32(m.memory, uint64(uint32(v4))+65840))
 					if t24 == v3 {
 						store32(m.memory, uint32(v4+i32(65840)), uint32(v2))
 						if v2 != 0 {
@@ -1733,12 +1733,12 @@ func (m *Module) Xfree(v0 int32) {
 						goto l1
 					}
 					{
-						t26 := int32(load32(m.memory, int64(uint32(v8))+16))
+						t26 := int32(load32(m.memory, uint64(uint32(v8))+16))
 						if v3 == t26 {
-							store32(m.memory, int64(uint32(v8))+16, uint32(v2))
+							store32(m.memory, uint64(uint32(v8))+16, uint32(v2))
 							goto l7
 						}
-						store32(m.memory, int64(uint32(v8))+20, uint32(v2))
+						store32(m.memory, uint64(uint32(v8))+20, uint32(v2))
 					}
 				l7:
 					if v2 == 0 {
@@ -1749,17 +1749,17 @@ func (m *Module) Xfree(v0 int32) {
 				if uint32(v2) < uint32(v6) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v2))+24, uint32(v8))
-				t27 := int32(load32(m.memory, int64(uint32(v3))+16))
+				store32(m.memory, uint64(uint32(v2))+24, uint32(v8))
+				t27 := int32(load32(m.memory, uint64(uint32(v3))+16))
 				v1 = t27
 				if v1 != 0 {
 					if uint32(v1) < uint32(v6) {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v2))+16, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+24, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+16, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+24, uint32(v2))
 				}
-				t28 := int32(load32(m.memory, int64(uint32(v3))+20))
+				t28 := int32(load32(m.memory, uint64(uint32(v3))+20))
 				v1 = t28
 				if v1 == 0 {
 					goto l2
@@ -1767,26 +1767,26 @@ func (m *Module) Xfree(v0 int32) {
 				if uint32(v1) < uint32(v6) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v2))+20, uint32(v1))
-				store32(m.memory, int64(uint32(v1))+24, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+20, uint32(v1))
+				store32(m.memory, uint64(uint32(v1))+24, uint32(v2))
 				goto l2
 			}
-			t29 := int32(load32(m.memory, int64(uint32(v5))+4))
+			t29 := int32(load32(m.memory, uint64(uint32(v5))+4))
 			v1 = t29
 			if v1&i32(3) != i32(3) {
 				goto l2
 			}
-			store32(m.memory, int64(uint32(v5))+4, uint32(v1&i32(-2)))
+			store32(m.memory, uint64(uint32(v5))+4, uint32(v1&i32(-2)))
 			store32(m.memory, uint32(i32(65544)), uint32(v0))
 			store32(m.memory, uint32(v5), uint32(v0))
-			store32(m.memory, int64(uint32(v3))+4, uint32(v0|i32(1)))
+			store32(m.memory, uint64(uint32(v3))+4, uint32(v0|i32(1)))
 			return
 		}
 	l2:
 		if uint32(v3) >= uint32(v5) {
 			goto l1
 		}
-		t30 := int32(load32(m.memory, int64(uint32(v5))+4))
+		t30 := int32(load32(m.memory, uint64(uint32(v5))+4))
 		v8 = t30
 		if v8&i32(1) == 0 {
 			goto l1
@@ -1798,7 +1798,7 @@ func (m *Module) Xfree(v0 int32) {
 				t32 := int32(load32(m.memory, uint32(i32(65548))))
 				v0 = t32 + v0
 				store32(m.memory, uint32(i32(65548)), uint32(v0))
-				store32(m.memory, int64(uint32(v3))+4, uint32(v0|i32(1)))
+				store32(m.memory, uint64(uint32(v3))+4, uint32(v0|i32(1)))
 				t33 := int32(load32(m.memory, uint32(i32(65556))))
 				if v3 != t33 {
 					return
@@ -1814,15 +1814,15 @@ func (m *Module) Xfree(v0 int32) {
 				t35 := int32(load32(m.memory, uint32(i32(65544))))
 				v0 = t35 + v0
 				store32(m.memory, uint32(i32(65544)), uint32(v0))
-				store32(m.memory, int64(uint32(v3))+4, uint32(v0|i32(1)))
+				store32(m.memory, uint64(uint32(v3))+4, uint32(v0|i32(1)))
 				store32(m.memory, uint32(v0+v3), uint32(v0))
 				return
 			}
-			t36 := int32(load32(m.memory, int64(uint32(v5))+12))
+			t36 := int32(load32(m.memory, uint64(uint32(v5))+12))
 			v2 = t36
 			{
 				if uint32(v8) <= uint32(i32(255)) {
-					t37 := int32(load32(m.memory, int64(uint32(v5))+8))
+					t37 := int32(load32(m.memory, uint64(uint32(v5))+8))
 					v1 = t37
 					t38 := v1
 					v4 = v8&i32(248) + i32(65576)
@@ -1830,7 +1830,7 @@ func (m *Module) Xfree(v0 int32) {
 						if uint32(v1) < uint32(v6) {
 							goto l1
 						}
-						t39 := int32(load32(m.memory, int64(uint32(v1))+12))
+						t39 := int32(load32(m.memory, uint64(uint32(v1))+12))
 						if t39 != v5 {
 							goto l1
 						}
@@ -1844,43 +1844,43 @@ func (m *Module) Xfree(v0 int32) {
 						if uint32(v2) < uint32(v6) {
 							goto l1
 						}
-						t41 := int32(load32(m.memory, int64(uint32(v2))+8))
+						t41 := int32(load32(m.memory, uint64(uint32(v2))+8))
 						if t41 != v5 {
 							goto l1
 						}
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+12, uint32(v2))
 					goto l8
 				}
-				t42 := int32(load32(m.memory, int64(uint32(v5))+24))
+				t42 := int32(load32(m.memory, uint64(uint32(v5))+24))
 				v9 = t42
 				if v2 != v5 {
-					t43 := int32(load32(m.memory, int64(uint32(v5))+8))
+					t43 := int32(load32(m.memory, uint64(uint32(v5))+8))
 					v1 = t43
 					if uint32(v1) < uint32(v6) {
 						goto l1
 					}
-					t44 := int32(load32(m.memory, int64(uint32(v1))+12))
+					t44 := int32(load32(m.memory, uint64(uint32(v1))+12))
 					if t44 != v5 {
 						goto l1
 					}
-					t45 := int32(load32(m.memory, int64(uint32(v2))+8))
+					t45 := int32(load32(m.memory, uint64(uint32(v2))+8))
 					if t45 != v5 {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+12, uint32(v2))
 					goto l9
 				}
 				{
-					t46 := int32(load32(m.memory, int64(uint32(v5))+20))
+					t46 := int32(load32(m.memory, uint64(uint32(v5))+20))
 					v1 = t46
 					var p47 int32
 					if v1 != 0 {
 						p47 = v5 + i32(20)
 					} else {
-						t48 := int32(load32(m.memory, int64(uint32(v5))+16))
+						t48 := int32(load32(m.memory, uint64(uint32(v5))+16))
 						v1 = t48
 						if v1 == 0 {
 							goto l10
@@ -1893,13 +1893,13 @@ func (m *Module) Xfree(v0 int32) {
 						v7 = v4
 						v2 = v1
 						v4 = v2 + i32(20)
-						t49 := int32(load32(m.memory, int64(uint32(v2))+20))
+						t49 := int32(load32(m.memory, uint64(uint32(v2))+20))
 						v1 = t49
 						if v1 != 0 {
 							goto l11
 						}
 						v4 = v2 + i32(16)
-						t50 := int32(load32(m.memory, int64(uint32(v2))+16))
+						t50 := int32(load32(m.memory, uint64(uint32(v2))+16))
 						v1 = t50
 						if v1 != 0 {
 							goto l11
@@ -1918,10 +1918,10 @@ func (m *Module) Xfree(v0 int32) {
 					goto l8
 				}
 				{
-					t51 := int32(load32(m.memory, int64(uint32(v5))+28))
+					t51 := int32(load32(m.memory, uint64(uint32(v5))+28))
 					v1 = t51
 					v4 = v1 << 2
-					t52 := int32(load32(m.memory, int64(uint32(v4))+65840))
+					t52 := int32(load32(m.memory, uint64(uint32(v4))+65840))
 					if t52 == v5 {
 						store32(m.memory, uint32(v4+i32(65840)), uint32(v2))
 						if v2 != 0 {
@@ -1935,12 +1935,12 @@ func (m *Module) Xfree(v0 int32) {
 						goto l1
 					}
 					{
-						t54 := int32(load32(m.memory, int64(uint32(v9))+16))
+						t54 := int32(load32(m.memory, uint64(uint32(v9))+16))
 						if v5 == t54 {
-							store32(m.memory, int64(uint32(v9))+16, uint32(v2))
+							store32(m.memory, uint64(uint32(v9))+16, uint32(v2))
 							goto l13
 						}
-						store32(m.memory, int64(uint32(v9))+20, uint32(v2))
+						store32(m.memory, uint64(uint32(v9))+20, uint32(v2))
 					}
 				l13:
 					if v2 == 0 {
@@ -1951,17 +1951,17 @@ func (m *Module) Xfree(v0 int32) {
 				if uint32(v2) < uint32(v6) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v2))+24, uint32(v9))
-				t55 := int32(load32(m.memory, int64(uint32(v5))+16))
+				store32(m.memory, uint64(uint32(v2))+24, uint32(v9))
+				t55 := int32(load32(m.memory, uint64(uint32(v5))+16))
 				v1 = t55
 				if v1 != 0 {
 					if uint32(v1) < uint32(v6) {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v2))+16, uint32(v1))
-					store32(m.memory, int64(uint32(v1))+24, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+16, uint32(v1))
+					store32(m.memory, uint64(uint32(v1))+24, uint32(v2))
 				}
-				t56 := int32(load32(m.memory, int64(uint32(v5))+20))
+				t56 := int32(load32(m.memory, uint64(uint32(v5))+20))
 				v1 = t56
 				if v1 == 0 {
 					goto l8
@@ -1969,23 +1969,23 @@ func (m *Module) Xfree(v0 int32) {
 				if uint32(v1) < uint32(v6) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v2))+20, uint32(v1))
-				store32(m.memory, int64(uint32(v1))+24, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+20, uint32(v1))
+				store32(m.memory, uint64(uint32(v1))+24, uint32(v2))
 			}
 		l8:
 			t57 := v3
 			v0 = v8&i32(-8) + v0
 			store32(m.memory, uint32(t57+v0), uint32(v0))
-			store32(m.memory, int64(uint32(v3))+4, uint32(v0|i32(1)))
+			store32(m.memory, uint64(uint32(v3))+4, uint32(v0|i32(1)))
 			if v3 != v10 {
 				goto l14
 			}
 			store32(m.memory, uint32(i32(65544)), uint32(v0))
 			return
 		}
-		store32(m.memory, int64(uint32(v5))+4, uint32(v8&i32(-2)))
+		store32(m.memory, uint64(uint32(v5))+4, uint32(v8&i32(-2)))
 		store32(m.memory, uint32(v0+v3), uint32(v0))
-		store32(m.memory, int64(uint32(v3))+4, uint32(v0|i32(1)))
+		store32(m.memory, uint64(uint32(v3))+4, uint32(v0|i32(1)))
 	l14:
 		if uint32(v0) <= uint32(i32(255)) {
 			v1 = v0&i32(248) + i32(65576)
@@ -1999,7 +1999,7 @@ func (m *Module) Xfree(v0 int32) {
 					v0 = v1
 					goto l15
 				}
-				t60 := int32(load32(m.memory, int64(uint32(v1))+8))
+				t60 := int32(load32(m.memory, uint64(uint32(v1))+8))
 				t61 := v6
 				v0 = t60
 				if uint32(t61) > uint32(v0) {
@@ -2007,10 +2007,10 @@ func (m *Module) Xfree(v0 int32) {
 				}
 			}
 		l15:
-			store32(m.memory, int64(uint32(v0))+12, uint32(v3))
-			store32(m.memory, int64(uint32(v1))+8, uint32(v3))
-			store32(m.memory, int64(uint32(v3))+12, uint32(v1))
-			store32(m.memory, int64(uint32(v3))+8, uint32(v0))
+			store32(m.memory, uint64(uint32(v0))+12, uint32(v3))
+			store32(m.memory, uint64(uint32(v1))+8, uint32(v3))
+			store32(m.memory, uint64(uint32(v3))+12, uint32(v1))
+			store32(m.memory, uint64(uint32(v3))+8, uint32(v0))
 			return
 		}
 		v2 = i32(31)
@@ -2025,8 +2025,8 @@ func (m *Module) Xfree(v0 int32) {
 			v1 = int32(uint32(i32_shl(v7, v2))>>15) - (v1 | v4 | v2)
 			v2 = i32_shr_u(t62, v1+i32(21))&i32(1) | v1<<1 + i32(28)
 		}
-		store32(m.memory, int64(uint32(v3))+28, uint32(v2))
-		store64(m.memory, int64(uint32(v3))+16, uint64(i64(0)))
+		store32(m.memory, uint64(uint32(v3))+28, uint32(v2))
+		store64(m.memory, uint64(uint32(v3))+16, uint64(i64(0)))
 		v4 = v2<<2 + i32(65840)
 		var p63 int32
 		{
@@ -2052,14 +2052,14 @@ func (m *Module) Xfree(v0 int32) {
 				l18:
 					{
 						v1 = v4
-						t69 := int32(load32(m.memory, int64(uint32(v1))+4))
+						t69 := int32(load32(m.memory, uint64(uint32(v1))+4))
 						if t69&i32(-8) == v0 {
 							goto l17
 						}
 						v4 = int32(uint32(v2) >> 29)
 						v2 = v2 << 1
 						v7 = v1 + v4&i32(4)
-						t70 := int32(load32(m.memory, int64(uint32(v7))+16))
+						t70 := int32(load32(m.memory, uint64(uint32(v7))+16))
 						v4 = t70
 						if v4 != 0 {
 							goto l18
@@ -2084,14 +2084,14 @@ func (m *Module) Xfree(v0 int32) {
 			if uint32(v1) < uint32(v6) {
 				goto l1
 			}
-			t72 := int32(load32(m.memory, int64(uint32(v1))+8))
+			t72 := int32(load32(m.memory, uint64(uint32(v1))+8))
 			t73 := v6
 			v4 = t72
 			if uint32(t73) > uint32(v4) {
 				goto l1
 			}
-			store32(m.memory, int64(uint32(v1))+8, uint32(v3))
-			store32(m.memory, int64(uint32(v4))+12, uint32(v3))
+			store32(m.memory, uint64(uint32(v1))+8, uint32(v3))
+			store32(m.memory, uint64(uint32(v4))+12, uint32(v3))
 			v2 = i32(8)
 			v7 = i32(24)
 			p63 = i32(0)
@@ -2099,7 +2099,7 @@ func (m *Module) Xfree(v0 int32) {
 	l19:
 		v0 = p63
 		store32(m.memory, uint32(v2+v3), uint32(v4))
-		store32(m.memory, int64(uint32(v3))+12, uint32(v1))
+		store32(m.memory, uint64(uint32(v3))+12, uint32(v1))
 		store32(m.memory, uint32(v3+v7), uint32(v0))
 		t74 := int32(load32(m.memory, uint32(i32(65568))))
 		v0 = t74 - i32(1)
@@ -2136,7 +2136,7 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 			if uint32(t3) > uint32(v5) {
 				goto l1
 			}
-			t4 := int32(load32(m.memory, int64(uint32(v5))+4))
+			t4 := int32(load32(m.memory, uint64(uint32(v5))+4))
 			v10 = t4
 			v2 = v10 & i32(3)
 			if v2 == i32(1) {
@@ -2147,7 +2147,7 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 				goto l1
 			}
 			v6 = v4 + v5
-			t5 := int32(load32(m.memory, int64(uint32(v6))+4))
+			t5 := int32(load32(m.memory, uint64(uint32(v6))+4))
 			v9 = t5
 			if v9&i32(1) == 0 {
 				goto l1
@@ -2173,10 +2173,10 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 					goto l3
 				}
 				v4 = v5 + v7
-				store32(m.memory, int64(uint32(v4))+4, uint32(v2|i32(3)))
-				store32(m.memory, int64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
-				t7 := int32(load32(m.memory, int64(uint32(v6))+4))
-				store32(m.memory, int64(uint32(v6))+4, uint32(t7|i32(1)))
+				store32(m.memory, uint64(uint32(v4))+4, uint32(v2|i32(3)))
+				store32(m.memory, uint64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
+				t7 := int32(load32(m.memory, uint64(uint32(v6))+4))
+				store32(m.memory, uint64(uint32(v6))+4, uint32(t7|i32(1)))
 				m._dispose_chunk(v4, v2)
 				goto l3
 			}
@@ -2192,8 +2192,8 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 				store32(m.memory, uint32(i32(65560)), uint32(v2))
 				v4 = v4 - v7
 				store32(m.memory, uint32(i32(65548)), uint32(v4))
-				store32(m.memory, int64(uint32(v2))+4, uint32(v4|i32(1)))
-				store32(m.memory, int64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
+				store32(m.memory, uint64(uint32(v2))+4, uint32(v4|i32(1)))
+				store32(m.memory, uint64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
 				goto l3
 			}
 			t10 := int32(load32(m.memory, uint32(i32(65556))))
@@ -2207,18 +2207,18 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 					v2 = v3 - v7
 					if uint32(v2) >= uint32(i32(16)) {
 						v4 = v5 + v7
-						store32(m.memory, int64(uint32(v4))+4, uint32(v2|i32(1)))
-						store32(m.memory, int64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
+						store32(m.memory, uint64(uint32(v4))+4, uint32(v2|i32(1)))
+						store32(m.memory, uint64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
 						v3 = v3 + v5
 						store32(m.memory, uint32(v3), uint32(v2))
-						t12 := int32(load32(m.memory, int64(uint32(v3))+4))
-						store32(m.memory, int64(uint32(v3))+4, uint32(t12&i32(-2)))
+						t12 := int32(load32(m.memory, uint64(uint32(v3))+4))
+						store32(m.memory, uint64(uint32(v3))+4, uint32(t12&i32(-2)))
 						goto l4
 					}
-					store32(m.memory, int64(uint32(v5))+4, uint32(v10&i32(1)|v3|i32(2)))
+					store32(m.memory, uint64(uint32(v5))+4, uint32(v10&i32(1)|v3|i32(2)))
 					v2 = v3 + v5
-					t13 := int32(load32(m.memory, int64(uint32(v2))+4))
-					store32(m.memory, int64(uint32(v2))+4, uint32(t13|i32(1)))
+					t13 := int32(load32(m.memory, uint64(uint32(v2))+4))
+					store32(m.memory, uint64(uint32(v2))+4, uint32(t13|i32(1)))
 					v4 = i32(0)
 					v2 = i32(0)
 				}
@@ -2234,11 +2234,11 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 			if uint32(v12) < uint32(v7) {
 				goto l2
 			}
-			t14 := int32(load32(m.memory, int64(uint32(v6))+12))
+			t14 := int32(load32(m.memory, uint64(uint32(v6))+12))
 			v3 = t14
 			{
 				if uint32(v9) <= uint32(i32(255)) {
-					t15 := int32(load32(m.memory, int64(uint32(v6))+8))
+					t15 := int32(load32(m.memory, uint64(uint32(v6))+8))
 					v2 = t15
 					t16 := v2
 					v4 = v9&i32(248) + i32(65576)
@@ -2246,7 +2246,7 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 						if uint32(v2) < uint32(v8) {
 							goto l1
 						}
-						t17 := int32(load32(m.memory, int64(uint32(v2))+12))
+						t17 := int32(load32(m.memory, uint64(uint32(v2))+12))
 						if t17 != v6 {
 							goto l1
 						}
@@ -2260,43 +2260,43 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 						if uint32(v3) < uint32(v8) {
 							goto l1
 						}
-						t19 := int32(load32(m.memory, int64(uint32(v3))+8))
+						t19 := int32(load32(m.memory, uint64(uint32(v3))+8))
 						if t19 != v6 {
 							goto l1
 						}
 					}
-					store32(m.memory, int64(uint32(v3))+8, uint32(v2))
-					store32(m.memory, int64(uint32(v2))+12, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+8, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+12, uint32(v3))
 					goto l5
 				}
-				t20 := int32(load32(m.memory, int64(uint32(v6))+24))
+				t20 := int32(load32(m.memory, uint64(uint32(v6))+24))
 				v11 = t20
 				if v3 != v6 {
-					t21 := int32(load32(m.memory, int64(uint32(v6))+8))
+					t21 := int32(load32(m.memory, uint64(uint32(v6))+8))
 					v2 = t21
 					if uint32(v2) < uint32(v8) {
 						goto l1
 					}
-					t22 := int32(load32(m.memory, int64(uint32(v2))+12))
+					t22 := int32(load32(m.memory, uint64(uint32(v2))+12))
 					if t22 != v6 {
 						goto l1
 					}
-					t23 := int32(load32(m.memory, int64(uint32(v3))+8))
+					t23 := int32(load32(m.memory, uint64(uint32(v3))+8))
 					if t23 != v6 {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v3))+8, uint32(v2))
-					store32(m.memory, int64(uint32(v2))+12, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+8, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+12, uint32(v3))
 					goto l6
 				}
 				{
-					t24 := int32(load32(m.memory, int64(uint32(v6))+20))
+					t24 := int32(load32(m.memory, uint64(uint32(v6))+20))
 					v2 = t24
 					var p25 int32
 					if v2 != 0 {
 						p25 = v6 + i32(20)
 					} else {
-						t26 := int32(load32(m.memory, int64(uint32(v6))+16))
+						t26 := int32(load32(m.memory, uint64(uint32(v6))+16))
 						v2 = t26
 						if v2 == 0 {
 							goto l7
@@ -2309,13 +2309,13 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 						v9 = v4
 						v3 = v2
 						v4 = v3 + i32(20)
-						t27 := int32(load32(m.memory, int64(uint32(v2))+20))
+						t27 := int32(load32(m.memory, uint64(uint32(v2))+20))
 						v2 = t27
 						if v2 != 0 {
 							goto l8
 						}
 						v4 = v3 + i32(16)
-						t28 := int32(load32(m.memory, int64(uint32(v3))+16))
+						t28 := int32(load32(m.memory, uint64(uint32(v3))+16))
 						v2 = t28
 						if v2 != 0 {
 							goto l8
@@ -2334,10 +2334,10 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 					goto l5
 				}
 				{
-					t29 := int32(load32(m.memory, int64(uint32(v6))+28))
+					t29 := int32(load32(m.memory, uint64(uint32(v6))+28))
 					v2 = t29
 					v4 = v2 << 2
-					t30 := int32(load32(m.memory, int64(uint32(v4))+65840))
+					t30 := int32(load32(m.memory, uint64(uint32(v4))+65840))
 					if t30 == v6 {
 						store32(m.memory, uint32(v4+i32(65840)), uint32(v3))
 						if v3 != 0 {
@@ -2351,12 +2351,12 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 						goto l1
 					}
 					{
-						t32 := int32(load32(m.memory, int64(uint32(v11))+16))
+						t32 := int32(load32(m.memory, uint64(uint32(v11))+16))
 						if v6 == t32 {
-							store32(m.memory, int64(uint32(v11))+16, uint32(v3))
+							store32(m.memory, uint64(uint32(v11))+16, uint32(v3))
 							goto l10
 						}
-						store32(m.memory, int64(uint32(v11))+20, uint32(v3))
+						store32(m.memory, uint64(uint32(v11))+20, uint32(v3))
 					}
 				l10:
 					if v3 == 0 {
@@ -2367,17 +2367,17 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 				if uint32(v3) < uint32(v8) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v3))+24, uint32(v11))
-				t33 := int32(load32(m.memory, int64(uint32(v6))+16))
+				store32(m.memory, uint64(uint32(v3))+24, uint32(v11))
+				t33 := int32(load32(m.memory, uint64(uint32(v6))+16))
 				v2 = t33
 				if v2 != 0 {
 					if uint32(v2) < uint32(v8) {
 						goto l1
 					}
-					store32(m.memory, int64(uint32(v3))+16, uint32(v2))
-					store32(m.memory, int64(uint32(v2))+24, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+16, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+24, uint32(v3))
 				}
-				t34 := int32(load32(m.memory, int64(uint32(v6))+20))
+				t34 := int32(load32(m.memory, uint64(uint32(v6))+20))
 				v2 = t34
 				if v2 == 0 {
 					goto l5
@@ -2385,24 +2385,24 @@ func (m *Module) Xrealloc(v0, v1 int32) int32 {
 				if uint32(v2) < uint32(v8) {
 					goto l1
 				}
-				store32(m.memory, int64(uint32(v3))+20, uint32(v2))
-				store32(m.memory, int64(uint32(v2))+24, uint32(v3))
+				store32(m.memory, uint64(uint32(v3))+20, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+24, uint32(v3))
 			}
 		l5:
 			v2 = v12 - v7
 			if uint32(v2) <= uint32(i32(15)) {
-				store32(m.memory, int64(uint32(v5))+4, uint32(v10&i32(1)|v12|i32(2)))
+				store32(m.memory, uint64(uint32(v5))+4, uint32(v10&i32(1)|v12|i32(2)))
 				v2 = v5 + v12
-				t35 := int32(load32(m.memory, int64(uint32(v2))+4))
-				store32(m.memory, int64(uint32(v2))+4, uint32(t35|i32(1)))
+				t35 := int32(load32(m.memory, uint64(uint32(v2))+4))
+				store32(m.memory, uint64(uint32(v2))+4, uint32(t35|i32(1)))
 				goto l3
 			}
 			v4 = v5 + v7
-			store32(m.memory, int64(uint32(v4))+4, uint32(v2|i32(3)))
-			store32(m.memory, int64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
+			store32(m.memory, uint64(uint32(v4))+4, uint32(v2|i32(3)))
+			store32(m.memory, uint64(uint32(v5))+4, uint32(v7|v10&i32(1)|i32(2)))
 			v3 = v5 + v12
-			t36 := int32(load32(m.memory, int64(uint32(v3))+4))
-			store32(m.memory, int64(uint32(v3))+4, uint32(t36|i32(1)))
+			t36 := int32(load32(m.memory, uint64(uint32(v3))+4))
+			store32(m.memory, uint64(uint32(v3))+4, uint32(t36|i32(1)))
 			m._dispose_chunk(v4, v2)
 			goto l3
 		}
@@ -2446,7 +2446,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 	v5 = v0 + v1
 	{
 		{
-			t0 := int32(load32(m.memory, int64(uint32(v0))+4))
+			t0 := int32(load32(m.memory, uint64(uint32(v0))+4))
 			v3 = t0
 			if v3&i32(1) != 0 {
 				t1 := int32(load32(m.memory, uint32(i32(65552))))
@@ -2469,10 +2469,10 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 			v1 = v1 + v4
 			t6 := int32(load32(m.memory, uint32(i32(65556))))
 			if t6 != v0 {
-				t7 := int32(load32(m.memory, int64(uint32(v0))+12))
+				t7 := int32(load32(m.memory, uint64(uint32(v0))+12))
 				v2 = t7
 				if uint32(v4) <= uint32(i32(255)) {
-					t8 := int32(load32(m.memory, int64(uint32(v0))+8))
+					t8 := int32(load32(m.memory, uint64(uint32(v0))+8))
 					v3 = t8
 					t9 := v3
 					v7 = v4&i32(248) + i32(65576)
@@ -2480,7 +2480,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 						if uint32(v3) < uint32(v6) {
 							goto l2
 						}
-						t10 := int32(load32(m.memory, int64(uint32(v3))+12))
+						t10 := int32(load32(m.memory, uint64(uint32(v3))+12))
 						if t10 != v0 {
 							goto l2
 						}
@@ -2494,43 +2494,43 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 						if uint32(v2) < uint32(v6) {
 							goto l2
 						}
-						t12 := int32(load32(m.memory, int64(uint32(v2))+8))
+						t12 := int32(load32(m.memory, uint64(uint32(v2))+8))
 						if t12 != v0 {
 							goto l2
 						}
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v3))
-					store32(m.memory, int64(uint32(v3))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+12, uint32(v2))
 					goto l0
 				}
-				t13 := int32(load32(m.memory, int64(uint32(v0))+24))
+				t13 := int32(load32(m.memory, uint64(uint32(v0))+24))
 				v8 = t13
 				if v0 != v2 {
-					t14 := int32(load32(m.memory, int64(uint32(v0))+8))
+					t14 := int32(load32(m.memory, uint64(uint32(v0))+8))
 					v3 = t14
 					if uint32(v3) < uint32(v6) {
 						goto l2
 					}
-					t15 := int32(load32(m.memory, int64(uint32(v3))+12))
+					t15 := int32(load32(m.memory, uint64(uint32(v3))+12))
 					if t15 != v0 {
 						goto l2
 					}
-					t16 := int32(load32(m.memory, int64(uint32(v2))+8))
+					t16 := int32(load32(m.memory, uint64(uint32(v2))+8))
 					if t16 != v0 {
 						goto l2
 					}
-					store32(m.memory, int64(uint32(v2))+8, uint32(v3))
-					store32(m.memory, int64(uint32(v3))+12, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+8, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+12, uint32(v2))
 					goto l3
 				}
 				{
-					t17 := int32(load32(m.memory, int64(uint32(v0))+20))
+					t17 := int32(load32(m.memory, uint64(uint32(v0))+20))
 					v4 = t17
 					var p18 int32
 					if v4 != 0 {
 						p18 = v0 + i32(20)
 					} else {
-						t19 := int32(load32(m.memory, int64(uint32(v0))+16))
+						t19 := int32(load32(m.memory, uint64(uint32(v0))+16))
 						v4 = t19
 						if v4 == 0 {
 							goto l4
@@ -2543,13 +2543,13 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 						v7 = v3
 						v2 = v4
 						v3 = v2 + i32(20)
-						t20 := int32(load32(m.memory, int64(uint32(v2))+20))
+						t20 := int32(load32(m.memory, uint64(uint32(v2))+20))
 						v4 = t20
 						if v4 != 0 {
 							goto l5
 						}
 						v3 = v2 + i32(16)
-						t21 := int32(load32(m.memory, int64(uint32(v2))+16))
+						t21 := int32(load32(m.memory, uint64(uint32(v2))+16))
 						v4 = t21
 						if v4 != 0 {
 							goto l5
@@ -2568,10 +2568,10 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					goto l0
 				}
 				{
-					t22 := int32(load32(m.memory, int64(uint32(v0))+28))
+					t22 := int32(load32(m.memory, uint64(uint32(v0))+28))
 					v3 = t22
 					v4 = v3 << 2
-					t23 := int32(load32(m.memory, int64(uint32(v4))+65840))
+					t23 := int32(load32(m.memory, uint64(uint32(v4))+65840))
 					if t23 == v0 {
 						store32(m.memory, uint32(v4+i32(65840)), uint32(v2))
 						if v2 != 0 {
@@ -2585,12 +2585,12 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 						goto l2
 					}
 					{
-						t25 := int32(load32(m.memory, int64(uint32(v8))+16))
+						t25 := int32(load32(m.memory, uint64(uint32(v8))+16))
 						if v0 == t25 {
-							store32(m.memory, int64(uint32(v8))+16, uint32(v2))
+							store32(m.memory, uint64(uint32(v8))+16, uint32(v2))
 							goto l7
 						}
-						store32(m.memory, int64(uint32(v8))+20, uint32(v2))
+						store32(m.memory, uint64(uint32(v8))+20, uint32(v2))
 					}
 				l7:
 					if v2 == 0 {
@@ -2601,17 +2601,17 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 				if uint32(v2) < uint32(v6) {
 					goto l2
 				}
-				store32(m.memory, int64(uint32(v2))+24, uint32(v8))
-				t26 := int32(load32(m.memory, int64(uint32(v0))+16))
+				store32(m.memory, uint64(uint32(v2))+24, uint32(v8))
+				t26 := int32(load32(m.memory, uint64(uint32(v0))+16))
 				v3 = t26
 				if v3 != 0 {
 					if uint32(v3) < uint32(v6) {
 						goto l2
 					}
-					store32(m.memory, int64(uint32(v2))+16, uint32(v3))
-					store32(m.memory, int64(uint32(v3))+24, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+16, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+24, uint32(v2))
 				}
-				t27 := int32(load32(m.memory, int64(uint32(v0))+20))
+				t27 := int32(load32(m.memory, uint64(uint32(v0))+20))
 				v3 = t27
 				if v3 == 0 {
 					goto l0
@@ -2619,19 +2619,19 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 				if uint32(v3) < uint32(v6) {
 					goto l2
 				}
-				store32(m.memory, int64(uint32(v2))+20, uint32(v3))
-				store32(m.memory, int64(uint32(v3))+24, uint32(v2))
+				store32(m.memory, uint64(uint32(v2))+20, uint32(v3))
+				store32(m.memory, uint64(uint32(v3))+24, uint32(v2))
 				goto l0
 			}
-			t28 := int32(load32(m.memory, int64(uint32(v5))+4))
+			t28 := int32(load32(m.memory, uint64(uint32(v5))+4))
 			v3 = t28
 			if v3&i32(3) != i32(3) {
 				goto l0
 			}
-			store32(m.memory, int64(uint32(v5))+4, uint32(v3&i32(-2)))
+			store32(m.memory, uint64(uint32(v5))+4, uint32(v3&i32(-2)))
 			store32(m.memory, uint32(i32(65544)), uint32(v1))
 			store32(m.memory, uint32(v5), uint32(v1))
-			store32(m.memory, int64(uint32(v0))+4, uint32(v1|i32(1)))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v1|i32(1)))
 			return
 		}
 	l0:
@@ -2639,7 +2639,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 			goto l2
 		}
 		{
-			t29 := int32(load32(m.memory, int64(uint32(v5))+4))
+			t29 := int32(load32(m.memory, uint64(uint32(v5))+4))
 			v9 = t29
 			if v9&i32(2) == 0 {
 				t30 := int32(load32(m.memory, uint32(i32(65560))))
@@ -2648,7 +2648,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					t31 := int32(load32(m.memory, uint32(i32(65548))))
 					v1 = t31 + v1
 					store32(m.memory, uint32(i32(65548)), uint32(v1))
-					store32(m.memory, int64(uint32(v0))+4, uint32(v1|i32(1)))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(v1|i32(1)))
 					t32 := int32(load32(m.memory, uint32(i32(65556))))
 					if v0 != t32 {
 						return
@@ -2664,15 +2664,15 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					t34 := int32(load32(m.memory, uint32(i32(65544))))
 					v1 = t34 + v1
 					store32(m.memory, uint32(i32(65544)), uint32(v1))
-					store32(m.memory, int64(uint32(v0))+4, uint32(v1|i32(1)))
+					store32(m.memory, uint64(uint32(v0))+4, uint32(v1|i32(1)))
 					store32(m.memory, uint32(v0+v1), uint32(v1))
 					return
 				}
-				t35 := int32(load32(m.memory, int64(uint32(v5))+12))
+				t35 := int32(load32(m.memory, uint64(uint32(v5))+12))
 				v2 = t35
 				{
 					if uint32(v9) <= uint32(i32(255)) {
-						t36 := int32(load32(m.memory, int64(uint32(v5))+8))
+						t36 := int32(load32(m.memory, uint64(uint32(v5))+8))
 						v3 = t36
 						t37 := v3
 						v4 = v9&i32(248) + i32(65576)
@@ -2680,7 +2680,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 							if uint32(v3) < uint32(v6) {
 								goto l2
 							}
-							t38 := int32(load32(m.memory, int64(uint32(v3))+12))
+							t38 := int32(load32(m.memory, uint64(uint32(v3))+12))
 							if t38 != v5 {
 								goto l2
 							}
@@ -2694,43 +2694,43 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 							if uint32(v2) < uint32(v6) {
 								goto l2
 							}
-							t40 := int32(load32(m.memory, int64(uint32(v2))+8))
+							t40 := int32(load32(m.memory, uint64(uint32(v2))+8))
 							if t40 != v5 {
 								goto l2
 							}
 						}
-						store32(m.memory, int64(uint32(v2))+8, uint32(v3))
-						store32(m.memory, int64(uint32(v3))+12, uint32(v2))
+						store32(m.memory, uint64(uint32(v2))+8, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+12, uint32(v2))
 						goto l8
 					}
-					t41 := int32(load32(m.memory, int64(uint32(v5))+24))
+					t41 := int32(load32(m.memory, uint64(uint32(v5))+24))
 					v8 = t41
 					if v2 != v5 {
-						t42 := int32(load32(m.memory, int64(uint32(v5))+8))
+						t42 := int32(load32(m.memory, uint64(uint32(v5))+8))
 						v3 = t42
 						if uint32(v3) < uint32(v6) {
 							goto l2
 						}
-						t43 := int32(load32(m.memory, int64(uint32(v3))+12))
+						t43 := int32(load32(m.memory, uint64(uint32(v3))+12))
 						if t43 != v5 {
 							goto l2
 						}
-						t44 := int32(load32(m.memory, int64(uint32(v2))+8))
+						t44 := int32(load32(m.memory, uint64(uint32(v2))+8))
 						if t44 != v5 {
 							goto l2
 						}
-						store32(m.memory, int64(uint32(v2))+8, uint32(v3))
-						store32(m.memory, int64(uint32(v3))+12, uint32(v2))
+						store32(m.memory, uint64(uint32(v2))+8, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+12, uint32(v2))
 						goto l9
 					}
 					{
-						t45 := int32(load32(m.memory, int64(uint32(v5))+20))
+						t45 := int32(load32(m.memory, uint64(uint32(v5))+20))
 						v4 = t45
 						var p46 int32
 						if v4 != 0 {
 							p46 = v5 + i32(20)
 						} else {
-							t47 := int32(load32(m.memory, int64(uint32(v5))+16))
+							t47 := int32(load32(m.memory, uint64(uint32(v5))+16))
 							v4 = t47
 							if v4 == 0 {
 								goto l10
@@ -2743,13 +2743,13 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 							v7 = v3
 							v2 = v4
 							v3 = v2 + i32(20)
-							t48 := int32(load32(m.memory, int64(uint32(v2))+20))
+							t48 := int32(load32(m.memory, uint64(uint32(v2))+20))
 							v4 = t48
 							if v4 != 0 {
 								goto l11
 							}
 							v3 = v2 + i32(16)
-							t49 := int32(load32(m.memory, int64(uint32(v2))+16))
+							t49 := int32(load32(m.memory, uint64(uint32(v2))+16))
 							v4 = t49
 							if v4 != 0 {
 								goto l11
@@ -2768,10 +2768,10 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 						goto l8
 					}
 					{
-						t50 := int32(load32(m.memory, int64(uint32(v5))+28))
+						t50 := int32(load32(m.memory, uint64(uint32(v5))+28))
 						v3 = t50
 						v4 = v3 << 2
-						t51 := int32(load32(m.memory, int64(uint32(v4))+65840))
+						t51 := int32(load32(m.memory, uint64(uint32(v4))+65840))
 						if t51 == v5 {
 							store32(m.memory, uint32(v4+i32(65840)), uint32(v2))
 							if v2 != 0 {
@@ -2785,12 +2785,12 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 							goto l2
 						}
 						{
-							t53 := int32(load32(m.memory, int64(uint32(v8))+16))
+							t53 := int32(load32(m.memory, uint64(uint32(v8))+16))
 							if v5 == t53 {
-								store32(m.memory, int64(uint32(v8))+16, uint32(v2))
+								store32(m.memory, uint64(uint32(v8))+16, uint32(v2))
 								goto l13
 							}
-							store32(m.memory, int64(uint32(v8))+20, uint32(v2))
+							store32(m.memory, uint64(uint32(v8))+20, uint32(v2))
 						}
 					l13:
 						if v2 == 0 {
@@ -2801,17 +2801,17 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					if uint32(v2) < uint32(v6) {
 						goto l2
 					}
-					store32(m.memory, int64(uint32(v2))+24, uint32(v8))
-					t54 := int32(load32(m.memory, int64(uint32(v5))+16))
+					store32(m.memory, uint64(uint32(v2))+24, uint32(v8))
+					t54 := int32(load32(m.memory, uint64(uint32(v5))+16))
 					v3 = t54
 					if v3 != 0 {
 						if uint32(v3) < uint32(v6) {
 							goto l2
 						}
-						store32(m.memory, int64(uint32(v2))+16, uint32(v3))
-						store32(m.memory, int64(uint32(v3))+24, uint32(v2))
+						store32(m.memory, uint64(uint32(v2))+16, uint32(v3))
+						store32(m.memory, uint64(uint32(v3))+24, uint32(v2))
 					}
-					t55 := int32(load32(m.memory, int64(uint32(v5))+20))
+					t55 := int32(load32(m.memory, uint64(uint32(v5))+20))
 					v3 = t55
 					if v3 == 0 {
 						goto l8
@@ -2819,22 +2819,22 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					if uint32(v3) < uint32(v6) {
 						goto l2
 					}
-					store32(m.memory, int64(uint32(v2))+20, uint32(v3))
-					store32(m.memory, int64(uint32(v3))+24, uint32(v2))
+					store32(m.memory, uint64(uint32(v2))+20, uint32(v3))
+					store32(m.memory, uint64(uint32(v3))+24, uint32(v2))
 				}
 			l8:
 				v1 = v9&i32(-8) + v1
 				store32(m.memory, uint32(v1+v0), uint32(v1))
-				store32(m.memory, int64(uint32(v0))+4, uint32(v1|i32(1)))
+				store32(m.memory, uint64(uint32(v0))+4, uint32(v1|i32(1)))
 				if v0 != v10 {
 					goto l14
 				}
 				store32(m.memory, uint32(i32(65544)), uint32(v1))
 				return
 			}
-			store32(m.memory, int64(uint32(v5))+4, uint32(v9&i32(-2)))
+			store32(m.memory, uint64(uint32(v5))+4, uint32(v9&i32(-2)))
 			store32(m.memory, uint32(v0+v1), uint32(v1))
-			store32(m.memory, int64(uint32(v0))+4, uint32(v1|i32(1)))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v1|i32(1)))
 		}
 	l14:
 		if uint32(v1) <= uint32(i32(255)) {
@@ -2849,7 +2849,7 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 					v1 = v3
 					goto l15
 				}
-				t58 := int32(load32(m.memory, int64(uint32(v3))+8))
+				t58 := int32(load32(m.memory, uint64(uint32(v3))+8))
 				t59 := v6
 				v1 = t58
 				if uint32(t59) > uint32(v1) {
@@ -2857,10 +2857,10 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 				}
 			}
 		l15:
-			store32(m.memory, int64(uint32(v1))+12, uint32(v0))
-			store32(m.memory, int64(uint32(v3))+8, uint32(v0))
-			store32(m.memory, int64(uint32(v0))+12, uint32(v3))
-			store32(m.memory, int64(uint32(v0))+8, uint32(v1))
+			store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
+			store32(m.memory, uint64(uint32(v3))+8, uint32(v0))
+			store32(m.memory, uint64(uint32(v0))+12, uint32(v3))
+			store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
 			return
 		}
 		v2 = i32(31)
@@ -2875,8 +2875,8 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 			v3 = int32(uint32(i32_shl(v7, v4))>>15) - (v2 | v3 | v4)
 			v2 = i32_shr_u(t60, v3+i32(21))&i32(1) | v3<<1 + i32(28)
 		}
-		store32(m.memory, int64(uint32(v0))+28, uint32(v2))
-		store64(m.memory, int64(uint32(v0))+16, uint64(i64(0)))
+		store32(m.memory, uint64(uint32(v0))+28, uint32(v2))
+		store64(m.memory, uint64(uint32(v0))+16, uint64(i64(0)))
 		v3 = v2<<2 + i32(65840)
 		t61 := int32(load32(m.memory, uint32(i32(65540))))
 		v4 = t61
@@ -2885,9 +2885,9 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 		if t62&v7 == 0 {
 			store32(m.memory, uint32(v3), uint32(v0))
 			store32(m.memory, uint32(i32(65540)), uint32(v4|v7))
-			store32(m.memory, int64(uint32(v0))+24, uint32(v3))
-			store32(m.memory, int64(uint32(v0))+8, uint32(v0))
-			store32(m.memory, int64(uint32(v0))+12, uint32(v0))
+			store32(m.memory, uint64(uint32(v0))+24, uint32(v3))
+			store32(m.memory, uint64(uint32(v0))+8, uint32(v0))
+			store32(m.memory, uint64(uint32(v0))+12, uint32(v0))
 			return
 		}
 		t64 := v1
@@ -2901,14 +2901,14 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 	l17:
 		{
 			v4 = v3
-			t66 := int32(load32(m.memory, int64(uint32(v4))+4))
+			t66 := int32(load32(m.memory, uint64(uint32(v4))+4))
 			if t66&i32(-8) == v1 {
 				goto l16
 			}
 			v3 = int32(uint32(v2) >> 29)
 			v2 = v2 << 1
 			v7 = v4 + v3&i32(4)
-			t67 := int32(load32(m.memory, int64(uint32(v7))+16))
+			t67 := int32(load32(m.memory, uint64(uint32(v7))+16))
 			v3 = t67
 			if v3 != 0 {
 				goto l17
@@ -2919,24 +2919,24 @@ func (m *Module) _dispose_chunk(v0, v1 int32) {
 			goto l2
 		}
 		store32(m.memory, uint32(v1), uint32(v0))
-		store32(m.memory, int64(uint32(v0))+24, uint32(v4))
-		store32(m.memory, int64(uint32(v0))+12, uint32(v0))
-		store32(m.memory, int64(uint32(v0))+8, uint32(v0))
+		store32(m.memory, uint64(uint32(v0))+24, uint32(v4))
+		store32(m.memory, uint64(uint32(v0))+12, uint32(v0))
+		store32(m.memory, uint64(uint32(v0))+8, uint32(v0))
 		return
 	l16:
 		if uint32(v4) < uint32(v6) {
 			goto l2
 		}
-		t68 := int32(load32(m.memory, int64(uint32(v4))+8))
+		t68 := int32(load32(m.memory, uint64(uint32(v4))+8))
 		v1 = t68
 		if uint32(v1) < uint32(v6) {
 			goto l2
 		}
-		store32(m.memory, int64(uint32(v4))+8, uint32(v0))
-		store32(m.memory, int64(uint32(v1))+12, uint32(v0))
-		store32(m.memory, int64(uint32(v0))+24, uint32(i32(0)))
-		store32(m.memory, int64(uint32(v0))+8, uint32(v1))
-		store32(m.memory, int64(uint32(v0))+12, uint32(v4))
+		store32(m.memory, uint64(uint32(v4))+8, uint32(v0))
+		store32(m.memory, uint64(uint32(v1))+12, uint32(v0))
+		store32(m.memory, uint64(uint32(v0))+24, uint32(i32(0)))
+		store32(m.memory, uint64(uint32(v0))+8, uint32(v1))
+		store32(m.memory, uint64(uint32(v0))+12, uint32(v4))
 	}
 	return
 l2:
@@ -3003,26 +3003,26 @@ l0:
 			v2 = v0 - v1
 			v4 = t5 - v2
 			if v6&i32(3) == 0 {
-				store32(m.memory, int64(uint32(v0))+4, uint32(v4))
+				store32(m.memory, uint64(uint32(v0))+4, uint32(v4))
 				t8 := int32(load32(m.memory, uint32(v1)))
 				store32(m.memory, uint32(v0), uint32(t8+v2))
 				goto l3
 			}
-			t9 := int32(load32(m.memory, int64(uint32(v0))+4))
-			store32(m.memory, int64(uint32(v0))+4, uint32(v4|t9&i32(1)|i32(2)))
+			t9 := int32(load32(m.memory, uint64(uint32(v0))+4))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v4|t9&i32(1)|i32(2)))
 			v4 = v0 + v4
-			t10 := int32(load32(m.memory, int64(uint32(v4))+4))
-			store32(m.memory, int64(uint32(v4))+4, uint32(t10|i32(1)))
+			t10 := int32(load32(m.memory, uint64(uint32(v4))+4))
+			store32(m.memory, uint64(uint32(v4))+4, uint32(t10|i32(1)))
 			t11 := int32(load32(m.memory, uint32(v5)))
 			store32(m.memory, uint32(v5), uint32(v2|t11&i32(1)|i32(2)))
 			v4 = v1 + v2
-			t12 := int32(load32(m.memory, int64(uint32(v4))+4))
-			store32(m.memory, int64(uint32(v4))+4, uint32(t12|i32(1)))
+			t12 := int32(load32(m.memory, uint64(uint32(v4))+4))
+			store32(m.memory, uint64(uint32(v4))+4, uint32(t12|i32(1)))
 			m._dispose_chunk(v1, v2)
 		}
 	l3:
 		{
-			t13 := int32(load32(m.memory, int64(uint32(v0))+4))
+			t13 := int32(load32(m.memory, uint64(uint32(v0))+4))
 			v1 = t13
 			if v1&i32(3) == 0 {
 				goto l4
@@ -3031,14 +3031,14 @@ l0:
 			if uint32(v2) <= uint32(v3+i32(16)) {
 				goto l4
 			}
-			store32(m.memory, int64(uint32(v0))+4, uint32(v3|v1&i32(1)|i32(2)))
+			store32(m.memory, uint64(uint32(v0))+4, uint32(v3|v1&i32(1)|i32(2)))
 			v1 = v0 + v3
 			t14 := v1
 			v3 = v2 - v3
-			store32(m.memory, int64(uint32(t14))+4, uint32(v3|i32(3)))
+			store32(m.memory, uint64(uint32(t14))+4, uint32(v3|i32(3)))
 			v2 = v0 + v2
-			t15 := int32(load32(m.memory, int64(uint32(v2))+4))
-			store32(m.memory, int64(uint32(v2))+4, uint32(t15|i32(1)))
+			t15 := int32(load32(m.memory, uint64(uint32(v2))+4))
+			store32(m.memory, uint64(uint32(v2))+4, uint32(t15|i32(1)))
 			m._dispose_chunk(v1, v3)
 		}
 	l4:
@@ -3091,11 +3091,11 @@ const (
 )
 
 //go:nosplit
-func load32[T uint32 | int64](mem []byte, addr T) uint32 {
+func load32[T uint32 | uint64](mem []byte, addr T) uint32 {
 	if !unalignedOK {
 		return binary.LittleEndian.Uint32(mem[addr:])
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	val := *(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
 		return bits.ReverseBytes32(val)
@@ -3104,7 +3104,7 @@ func load32[T uint32 | int64](mem []byte, addr T) uint32 {
 }
 
 //go:nosplit
-func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
+func store32[T uint32 | uint64](mem []byte, addr T, val uint32) {
 	if !unalignedOK {
 		binary.LittleEndian.PutUint32(mem[addr:], val)
 		return
@@ -3112,16 +3112,16 @@ func store32[T uint32 | int64](mem []byte, addr T, val uint32) {
 	if big {
 		val = bits.ReverseBytes32(val)
 	}
-	_ = (*[4]byte)(mem[addr:])
+	_ = mem[uint64(addr)+3]
 	*(*uint32)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
 //go:nosplit
-func load64[T uint32 | int64](mem []byte, addr T) uint64 {
+func load64[T uint32 | uint64](mem []byte, addr T) uint64 {
 	if !unalignedOK {
 		return binary.LittleEndian.Uint64(mem[addr:])
 	}
-	_ = (*[8]byte)(mem[addr:])
+	_ = mem[uint64(addr)+7]
 	val := *(*uint64)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr)))
 	if big {
 		return bits.ReverseBytes64(val)
@@ -3130,7 +3130,7 @@ func load64[T uint32 | int64](mem []byte, addr T) uint64 {
 }
 
 //go:nosplit
-func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
+func store64[T uint32 | uint64](mem []byte, addr T, val uint64) {
 	if !unalignedOK {
 		binary.LittleEndian.PutUint64(mem[addr:], val)
 		return
@@ -3138,7 +3138,7 @@ func store64[T uint32 | int64](mem []byte, addr T, val uint64) {
 	if big {
 		val = bits.ReverseBytes64(val)
 	}
-	_ = (*[8]byte)(mem[addr:])
+	_ = mem[uint64(addr)+7]
 	*(*uint64)(unsafe.Add(unsafe.Pointer(unsafe.SliceData(mem)), uintptr(addr))) = val
 }
 
@@ -3165,19 +3165,18 @@ func i32_rotl(x, y int32) int32 {
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {
 	buf := *mem
-	len := int64(len(buf))
+	len := len(buf)
 	old := len >> 16
 	if delta == 0 {
-		return old
+		return int64(old)
 	}
-	new := old + delta
-	add := new<<16 - len
-	max = min(max, int64(math.MaxInt)>>16)
-	if new > max || new < old || add < 0 {
+	max = int64(min(uint64(max), math.MaxInt>>16))
+	new, c := bits.Add64(uint64(old), uint64(delta), 0)
+	if c != 0 || new > uint64(max) {
 		return -1
 	}
-	*mem = append(buf, make([]byte, add)...)
-	return old
+	*mem = append(buf, make([]byte, int(new<<16)-len)...)
+	return int64(old)
 }
 
 func memory_copy[T uint32 | uint64](mem []byte, dest, src, n T) {

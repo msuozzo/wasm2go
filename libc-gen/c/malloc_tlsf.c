@@ -91,6 +91,7 @@ static inline size_t tlsf_block_get_size(const block_header_t* block) {
 }
 
 static inline void tlsf_block_set_size(block_header_t* block, size_t size) {
+  assert((size & BLOCK_TAG_MASK) == 0);
   block->size = size | (block->size & BLOCK_TAG_MASK);
 }
 
@@ -130,11 +131,13 @@ static inline block_header_t* tlsf_block_next_phys(
 
 static inline block_header_t* tlsf_block_prev_phys(
     const block_header_t* block) {
+  assert(tlsf_block_is_prev_free(block));
   size_t prev_size = *((const size_t*)block - 1);
   return (block_header_t*)((char*)block - prev_size);
 }
 
 static inline void* tlsf_block_to_payload(const block_header_t* block) {
+  assert(__builtin_is_aligned(block + 1, ALIGN_SIZE));
   return __builtin_assume_aligned(block + 1, ALIGN_SIZE);
 }
 
@@ -147,8 +150,8 @@ static inline block_header_t* tlsf_payload_to_block(const void* ptr) {
 
 static inline size_t tlsf_mapping_size(size_t size) {
   if (size < (1U << FL_INDEX_SHIFT)) {
-    // No rounding needed: size is aligned.
-    return size;
+    assert(__builtin_is_aligned(size, ALIGN_SIZE));
+    return size;  // No rounding needed.
   }
   int t = tlsf_fls(size);
   int shift = t - SL_INDEX_LOG2;
@@ -158,10 +161,10 @@ static inline size_t tlsf_mapping_size(size_t size) {
 static void tlsf_mapping(size_t size, bool insert, int* restrict fl,
                          int* restrict sl) {
   if (size < (1U << FL_INDEX_SHIFT)) {
-    // No rounding needed: size is aligned.
+    assert(__builtin_is_aligned(size, ALIGN_SIZE));
     *fl = 0;
     *sl = (int)(size >> ALIGN_LOG2);
-    return;
+    return;  // No rounding needed.
   }
 
   int t = tlsf_fls(size);
@@ -318,10 +321,10 @@ static void tlsf_add_pool(char* pool_start, char* pool_end) {
   // Add a sentinel block to the end of the pool.
   block_header_t* sentinel =
       (block_header_t*)(pool_end - sizeof(block_header_t));
-  sentinel->size = 0;
+  sentinel->size = 0;  // Used, zero size.
 
   // Initialize block, and add it to the free lists.
-  if (!is_contiguous) block->size = 0;  // No previous block, clear tag bits.
+  if (!is_contiguous) block->size = 0;  // New block, clear tag bits.
   tlsf_block_set_size(block, (char*)sentinel - (char*)block);
   tlsf_block_free(block);
 
@@ -376,20 +379,20 @@ void* malloc(size_t size) {
 }
 
 void* realloc(void* ptr, size_t size) {
+  if (ptr == NULL) return malloc(size);
   if (size == 0) {
     free(ptr);
     return NULL;
   }
   if (size > PTRDIFF_MAX) return NULL;
-  if (ptr == NULL) return malloc(size);
 
   block_header_t* block = tlsf_payload_to_block(ptr);
   size_t old_size = tlsf_block_get_size(block);
-  size_t block_size = tlsf_request_to_block_size(size);
+  size_t new_size = tlsf_request_to_block_size(size);
 
   // Shrink or stay the same in-place.
-  if (block_size <= old_size) {
-    block_header_t* remaining = tlsf_block_split(block, block_size);
+  if (new_size <= old_size) {
+    block_header_t* remaining = tlsf_block_split(block, new_size);
     if (remaining) tlsf_block_free(remaining);
     return ptr;
   }
@@ -397,12 +400,12 @@ void* realloc(void* ptr, size_t size) {
   // Expand in-place if the next physical block is free and large enough.
   block_header_t* next = tlsf_block_next_phys(block);
   if (tlsf_block_is_free(next) &&
-      old_size + tlsf_block_get_size(next) >= block_size) {
+      tlsf_block_get_size(next) + old_size >= new_size) {
     tlsf_remove_free_block((free_block_t*)next);
     tlsf_block_set_size(block, old_size + tlsf_block_get_size(next));
     tlsf_block_set_prev_free(tlsf_block_next_phys(block), false);
 
-    block_header_t* remaining = tlsf_block_split(block, block_size);
+    block_header_t* remaining = tlsf_block_split(block, new_size);
     if (remaining) tlsf_block_free(remaining);
     return ptr;
   }
@@ -443,10 +446,12 @@ void* memalign(size_t align, size_t size) {
 
   block_header_t* block = tlsf_payload_to_block(raw_payload);
 
+  assert(aligned_payload + size <= raw_payload + need);
   if (aligned_payload > raw_payload) {
     size_t front_padding = aligned_payload - raw_payload;
     block_header_t* aligned_block = tlsf_block_split(block, front_padding);
 
+    assert(aligned_block != NULL);
     tlsf_block_free(block);
     block = aligned_block;
   }
