@@ -98,6 +98,7 @@ var (
 
 		// Helpers.
 
+		"ptr64":  "uint64",
 		"load16": "uint16",
 		"load32": "uint32",
 		"load64": "uint64",

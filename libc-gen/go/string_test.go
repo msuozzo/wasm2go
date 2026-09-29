@@ -2,22 +2,22 @@ package libc
 
 import "testing"
 
-func writeString(p ptr, s string) {
-	copy(memory[uptr(p):], s)
-	memory[uptr(p)+uptr(len(s))] = 0
+func writeString(p sptr_t, s string) {
+	copy(memory[uptr_t(p):], s)
+	memory[uptr_t(p)+uptr_t(len(s))] = 0
 }
 
 func Test_memchr(t *testing.T) {
 	memory = make([]byte, 1024)
 	writeString(10, "hello world")
 
-	if got := memchr(10, 'w', ptr(len("hello world"))); got != 16 {
+	if got := memchr(10, 'w', sptr_t(len("hello world"))); got != 16 {
 		t.Errorf("got %v, want 16", got)
 	}
-	if got := memchr(10, 'z', ptr(len("hello world"))); got != 0 {
+	if got := memchr(10, 'z', sptr_t(len("hello world"))); got != 0 {
 		t.Errorf("got %v, want 0", got)
 	}
-	if got := memchr(10, 'w', ptr(len("hello"))); got != 0 {
+	if got := memchr(10, 'w', sptr_t(len("hello"))); got != 0 {
 		t.Errorf("got %v, want 0", got)
 	}
 }
@@ -29,13 +29,13 @@ func Test_memmem(t *testing.T) {
 	writeString(40, "z")
 	writeString(50, "")
 
-	if got, want := memmem(10, ptr(len("hello world")), 30, ptr(len("world"))), 10+len("hello "); got != ptr(want) {
+	if got, want := memmem(10, sptr_t(len("hello world")), 30, sptr_t(len("world"))), 10+len("hello "); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
-	if got := memmem(10, ptr(len("hello world")), 50, 0); got != 10 {
+	if got := memmem(10, sptr_t(len("hello world")), 50, 0); got != 10 {
 		t.Errorf("got %v, want 10", got)
 	}
-	if got := memmem(10, ptr(len("hello world")), 40, 1); got != 0 {
+	if got := memmem(10, sptr_t(len("hello world")), 40, 1); got != 0 {
 		t.Errorf("got %v, want 0", got)
 	}
 }
@@ -77,7 +77,7 @@ func Test_strlen(t *testing.T) {
 	writeString(10, "hello")
 	writeString(20, "")
 
-	if got, want := strlen(10), len("hello"); got != ptr(want) {
+	if got, want := strlen(10), len("hello"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 	if got := strlen(20); got != 0 {
@@ -89,13 +89,13 @@ func Test_strchr(t *testing.T) {
 	memory = make([]byte, 1024)
 	writeString(10, "hello")
 
-	if got, want := strchr(10, 'l'), 10+2; got != ptr(want) {
+	if got, want := strchr(10, 'l'), 10+2; got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 	if got := strchr(10, 'z'); got != 0 {
 		t.Errorf("got %v, want 0", got)
 	}
-	if got, want := strchr(10, 0), 10+len("hello"); got != ptr(want) {
+	if got, want := strchr(10, 0), 10+len("hello"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 }
@@ -104,10 +104,10 @@ func Test_strchrnul(t *testing.T) {
 	memory = make([]byte, 1024)
 	writeString(10, "hello")
 
-	if got, want := strchrnul(10, 'l'), 10+2; got != ptr(want) {
+	if got, want := strchrnul(10, 'l'), 10+2; got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
-	if got, want := strchrnul(10, 'z'), 10+len("hello"); got != ptr(want) {
+	if got, want := strchrnul(10, 'z'), 10+len("hello"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 }
@@ -116,13 +116,13 @@ func Test_strrchr(t *testing.T) {
 	memory = make([]byte, 1024)
 	writeString(10, "hello")
 
-	if got, want := strrchr(10, 'l'), 10+3; got != ptr(want) {
+	if got, want := strrchr(10, 'l'), 10+3; got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 	if got := strrchr(10, 'z'); got != 0 {
 		t.Errorf("got %v, want 0", got)
 	}
-	if got, want := strrchr(10, 0), 10+len("hello"); got != ptr(want) {
+	if got, want := strrchr(10, 0), 10+len("hello"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 }
@@ -134,7 +134,7 @@ func Test_strstr(t *testing.T) {
 	writeString(40, "z")
 	writeString(50, "")
 
-	if got, want := strstr(10, 30), 10+len("hello "); got != ptr(want) {
+	if got, want := strstr(10, 30), 10+len("hello "); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 	if got := strstr(10, 50); got != 10 {
@@ -180,7 +180,7 @@ func Test_strspn(t *testing.T) {
 	writeString(10, "hello world")
 	writeString(30, "helo ")
 
-	if got, want := strspn(10, 30), len("hello "); got != ptr(want) {
+	if got, want := strspn(10, 30), len("hello "); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 }
@@ -191,10 +191,10 @@ func Test_strcspn(t *testing.T) {
 	writeString(30, " ")
 	writeString(40, "xyz")
 
-	if got, want := strcspn(10, 30), len("hello"); got != ptr(want) {
+	if got, want := strcspn(10, 30), len("hello"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
-	if got, want := strcspn(10, 40), len("hello world"); got != ptr(want) {
+	if got, want := strcspn(10, 40), len("hello world"); got != sptr_t(want) {
 		t.Errorf("got %v, want %d", got, want)
 	}
 }

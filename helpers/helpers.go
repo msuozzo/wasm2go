@@ -461,6 +461,9 @@ func store64[T uint32 | uint64](mem []byte, addr T, val uint64) {
 	binary.LittleEndian.PutUint64(mem[addr:], val)
 }
 
+//go:nosplit
+func ptr64(p uint64) uint64 { return p >> (p >> 63) }
+
 // Bulk memory operations.
 
 func memory_grow(mem *[]byte, delta, max int64) int64 {

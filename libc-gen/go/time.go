@@ -2,20 +2,20 @@ package libc
 
 import "time"
 
-func localtime_r(timer, buf ptr) ptr {
-	t := load64(memory, uptr(timer))
-	storetime_r(memory[uptr(buf):], time.Unix(int64(t), 0))
+func localtime_r(timer, buf sptr_t) sptr_t {
+	t := load64(memory, cptr_t(uptr_t(timer)))
+	storetime_r(memory[uptr_t(buf):], time.Unix(int64(t), 0))
 	return buf
 }
 
-func gmtime_r(timer, buf ptr) ptr {
-	t := load64(memory, uptr(timer))
-	storetime_r(memory[uptr(buf):], time.Unix(int64(t), 0).UTC())
+func gmtime_r(timer, buf sptr_t) sptr_t {
+	t := load64(memory, cptr_t(uptr_t(timer)))
+	storetime_r(memory[uptr_t(buf):], time.Unix(int64(t), 0).UTC())
 	return buf
 }
 
 func storetime_r(buf []byte, t time.Time) {
-	const size uptr = 32 / 8
+	const size cptr_t = 32 / 8
 	var isdst uint32
 	if t.IsDST() {
 		isdst = 1
@@ -36,11 +36,11 @@ func storetime_r(buf []byte, t time.Time) {
 	store32(buf, 10*size, 0)
 }
 
-func gettimeofday(arg, _ ptr) int32 {
+func gettimeofday(arg, _ sptr_t) int32 {
 	if arg != 0 {
 		now := time.Now()
-		store64(memory, uptr(arg), uint64(now.Unix()))
-		store32(memory, uptr(arg)+8, uint32(now.Nanosecond()/1000))
+		store64(memory, cptr_t(uptr_t(arg))+0, uint64(now.Unix()))
+		store32(memory, cptr_t(uptr_t(arg))+8, uint32(now.Nanosecond()/1000))
 	}
 	return 0
 }

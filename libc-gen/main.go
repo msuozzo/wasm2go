@@ -19,6 +19,8 @@ import (
 	"slices"
 	"strings"
 
+	"golang.org/x/tools/go/ast/astutil"
+
 	"github.com/ncruces/wasm2go/internal/mangle"
 )
 
@@ -28,7 +30,7 @@ var src embed.FS
 var (
 	output  = flag.String("o", "", "output file (default stdout)")
 	wasm    = flag.String("wasm", "", "input.wasm file")
-	pkg     = flag.String("pkg", "", "package name (default module name, or wasm2go)")
+	pkg     = flag.String("pkg", "", "package name (default wasm2go)")
 	m64     = flag.Bool("m64", false, "use 64-bit pointers (int64)")
 	deref   = flag.Bool("deref-mem", false, "dereference memory (*m.memory instead of m.memory)")
 	cout    = flag.String("c-out", "", "extract libc C source and header files to directory")
@@ -73,12 +75,14 @@ func main() {
 		return
 	}
 
-	ptrType := "int32"
+	wptrType := "uint"
+	sptrType := "int32"
 	uptrType := "uint32"
 	invokeTypes['p'] = "int32"
 	if *m64 {
-		ptrType = "int64"
+		sptrType = "int64"
 		uptrType = "uint64"
+		wptrType = "uint64"
 		invokeTypes['p'] = "int64"
 	}
 
@@ -171,6 +175,19 @@ func main() {
 			}},
 		}
 
+		astutil.Apply(fd, nil, func(c *astutil.Cursor) bool {
+			if call, ok := c.Node().(*ast.CallExpr); ok {
+				if id, ok := call.Fun.(*ast.Ident); ok && id.Name == "cptr_t" {
+					if *m64 {
+						id.Name = "ptr64"
+					} else {
+						c.Replace(call.Args[0])
+					}
+				}
+			}
+			return true
+		})
+
 		ast.Inspect(fd, func(n ast.Node) bool {
 			switch x := n.(type) {
 			case *ast.SliceExpr:
@@ -192,9 +209,11 @@ func main() {
 				}
 			case *ast.Ident:
 				switch x.Name {
-				case "ptr":
-					x.Name = ptrType
-				case "uptr":
+				case "wptr_t":
+					x.Name = wptrType
+				case "sptr_t":
+					x.Name = sptrType
+				case "uptr_t", "cptr_t":
 					x.Name = uptrType
 				}
 			case *ast.SelectorExpr:

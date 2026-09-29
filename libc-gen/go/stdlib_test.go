@@ -11,7 +11,7 @@ func Test_strtod(t *testing.T) {
 	tests := []struct {
 		input  string
 		want   float64
-		offset ptr
+		offset sptr_t
 	}{
 		{"123.45", 123.45, 6},
 		{"  -98.76xyz", -98.76, 8},
@@ -25,16 +25,16 @@ func Test_strtod(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.input, func(t *testing.T) {
-			start := ptr(16)
-			endptr := ptr(4)
+			start := sptr_t(16)
+			endptr := sptr_t(4)
 
 			writeString(start, tc.input)
-			store32(memory, uptr(endptr), 0)
+			store32(memory, cptr_t(uptr_t(endptr)), 0)
 
 			got := strtod(start, endptr)
 			checkFloat(t, got, tc.want)
 
-			end := ptr(load32(memory, uptr(endptr)))
+			end := sptr_t(load32(memory, cptr_t(uptr_t(endptr))))
 			if tc.offset != end-start {
 				t.Errorf("got %d, want %v endptr offset", end-start, tc.offset)
 			}
@@ -49,7 +49,7 @@ func Test_strtol(t *testing.T) {
 		input  string
 		base   int32
 		want   int32
-		offset ptr
+		offset sptr_t
 	}{
 		{"12345", 10, 12345, 5},
 		{"  -42abc", 10, -42, 5},
@@ -64,18 +64,18 @@ func Test_strtol(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.input, func(t *testing.T) {
-			start := ptr(16)
-			endptr := ptr(4)
+			start := sptr_t(16)
+			endptr := sptr_t(4)
 
 			writeString(start, tc.input)
-			store32(memory, uptr(endptr), 0)
+			store32(memory, cptr_t(uptr_t(endptr)), 0)
 
 			got := strtol(start, endptr, tc.base)
 			if got != tc.want {
 				t.Fatalf("got %v, want %v", got, tc.want)
 			}
 
-			end := ptr(load32(memory, uptr(endptr)))
+			end := sptr_t(load32(memory, cptr_t(uptr_t(endptr))))
 			if tc.offset != end-start {
 				t.Errorf("got %d, want %v endptr offset", end-start, tc.offset)
 			}
@@ -90,7 +90,7 @@ func Test_strtoul(t *testing.T) {
 		input  string
 		base   int32
 		want   uint32
-		offset ptr
+		offset sptr_t
 	}{
 		{"12345", 10, 12345, 5},
 		{"  -42abc", 10, 4294967254, 5},
@@ -107,18 +107,18 @@ func Test_strtoul(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.input, func(t *testing.T) {
-			start := ptr(16)
-			endptr := ptr(4)
+			start := sptr_t(16)
+			endptr := sptr_t(4)
 
 			writeString(start, tc.input)
-			store32(memory, uptr(endptr), 0)
+			store32(memory, cptr_t(uptr_t(endptr)), 0)
 
 			got := strtoul(start, endptr, tc.base)
 			if got != tc.want {
 				t.Fatalf("got %v, want %v", got, tc.want)
 			}
 
-			end := ptr(load32(memory, uptr(endptr)))
+			end := sptr_t(load32(memory, cptr_t(uptr_t(endptr))))
 			if tc.offset != end-start {
 				t.Errorf("got %d, want %v endptr offset", end-start, tc.offset)
 			}

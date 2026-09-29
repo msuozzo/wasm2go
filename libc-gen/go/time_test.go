@@ -7,12 +7,12 @@ import (
 
 func Test_gmtime_r(t *testing.T) {
 	memory = make([]byte, 1024)
-	timer := ptr(8)
-	buf := ptr(16)
+	timer := sptr_t(8)
+	buf := sptr_t(16)
 
 	// 1234567890 = 2009-02-13 23:31:30 UTC
 	ts := int64(1234567890)
-	store64(memory, uptr(timer), uint64(ts))
+	store64(memory, cptr_t(uptr_t(timer)), uint64(ts))
 
 	res := gmtime_r(timer, buf)
 	if res != buf {
@@ -34,7 +34,7 @@ func Test_gmtime_r(t *testing.T) {
 	}
 
 	for i, want := range wantFields {
-		got := load32(memory, uptr(buf)+uptr(i)*4)
+		got := load32(memory, cptr_t(uptr_t(buf)+uptr_t(i)*4))
 		if got != want {
 			t.Errorf("field %d: got %v, want %v", i, got, want)
 		}
@@ -43,11 +43,11 @@ func Test_gmtime_r(t *testing.T) {
 
 func Test_localtime_r(t *testing.T) {
 	memory = make([]byte, 1024)
-	timer := ptr(8)
-	buf := ptr(16)
+	timer := sptr_t(8)
+	buf := sptr_t(16)
 
 	ts := int64(1234567890)
-	store64(memory, uptr(timer), uint64(ts))
+	store64(memory, cptr_t(uptr_t(timer)), uint64(ts))
 
 	res := localtime_r(timer, buf)
 	if res != buf {
@@ -77,7 +77,7 @@ func Test_localtime_r(t *testing.T) {
 	}
 
 	for i, want := range wantFields {
-		got := load32(memory, uptr(buf)+uptr(i)*4)
+		got := load32(memory, cptr_t(uptr_t(buf)+uptr_t(i)*4))
 		if got != want {
 			t.Errorf("field %d: got %v, want %v", i, got, want)
 		}

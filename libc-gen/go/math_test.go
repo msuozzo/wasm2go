@@ -15,14 +15,14 @@ func Test_lgamma(t *testing.T) {
 
 func Test_lgamma_r(t *testing.T) {
 	memory = make([]byte, 1024)
-	sptr := ptr(4)
+	sptr := sptr_t(4)
 
 	got := lgamma_r(2.5, sptr)
 	want, sign := math.Lgamma(2.5)
 
 	checkFloat(t, got, want)
 
-	gotSign := int32(load32(memory, uptr(sptr)))
+	gotSign := int32(load32(memory, cptr_t(uptr_t(sptr))))
 	if gotSign != int32(sign) {
 		t.Errorf("want sign %v, got %v", sign, gotSign)
 	}
@@ -30,14 +30,14 @@ func Test_lgamma_r(t *testing.T) {
 
 func Test_frexp(t *testing.T) {
 	memory = make([]byte, 1024)
-	eptr := ptr(8)
+	eptr := sptr_t(8)
 
 	got := frexp(16.0, eptr)
 	want, exp := math.Frexp(16.0)
 
 	checkFloat(t, got, want)
 
-	gotExp := int32(load32(memory, uptr(eptr)))
+	gotExp := int32(load32(memory, cptr_t(uptr_t(eptr))))
 	if gotExp != int32(exp) {
 		t.Errorf("want exp %v, got %v", exp, gotExp)
 	}
@@ -45,7 +45,7 @@ func Test_frexp(t *testing.T) {
 
 func Test_modf(t *testing.T) {
 	memory = make([]byte, 1024)
-	iptr := ptr(16)
+	iptr := sptr_t(16)
 
 	tests := []struct {
 		name  string
@@ -64,9 +64,9 @@ func Test_modf(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			store64(memory, uptr(iptr), 0)
+			store64(memory, cptr_t(uptr_t(iptr)), 0)
 			gotF := modf(tc.x, iptr)
-			gotI := math.Float64frombits(load64(memory, uptr(iptr)))
+			gotI := math.Float64frombits(load64(memory, cptr_t(uptr_t(iptr))))
 
 			checkFloat(t, gotI, tc.wantI)
 			checkFloat(t, gotF, tc.wantF)

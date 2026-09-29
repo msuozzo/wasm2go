@@ -6,32 +6,32 @@ import (
 	"unsafe"
 )
 
-func strtod(s, endptr ptr) float64 {
+func strtod(s, endptr sptr_t) float64 {
 	return strtod_helper(s, endptr, 64)
 }
 
-func strtof(s, endptr ptr) float32 {
+func strtof(s, endptr sptr_t) float32 {
 	return float32(strtod_helper(s, endptr, 32))
 }
 
-func strtoll(s, endptr ptr, base int32) int64 {
+func strtoll(s, endptr sptr_t, base int32) int64 {
 	return strtoll_helper(s, endptr, base, 64)
 }
 
-func strtoull(s, endptr ptr, base int32) uint64 {
+func strtoull(s, endptr sptr_t, base int32) uint64 {
 	return strtoull_helper(s, endptr, base, 64)
 }
 
-func strtol(s, endptr ptr, base int32) int32 {
+func strtol(s, endptr sptr_t, base int32) int32 {
 	return int32(strtoll_helper(s, endptr, base, 32))
 }
 
-func strtoul(s, endptr ptr, base int32) uint32 {
+func strtoul(s, endptr sptr_t, base int32) uint32 {
 	return uint32(strtoull_helper(s, endptr, base, 32))
 }
 
-func strtod_helper(s, endptr ptr, bitSize int) float64 {
-	m0 := memory[uptr(s):]
+func strtod_helper(s, endptr sptr_t, bitSize int) float64 {
+	m0 := memory[uptr_t(s):]
 	m1 := bytes.TrimLeft(m0, " \t\n\v\f\r")
 	m2 := bytes.TrimLeft(m1, "+-.0123456789abcdefinptxyABCDEFINPTXY")
 	prefix := len(m0) - len(m1)
@@ -49,15 +49,15 @@ func strtod_helper(s, endptr ptr, bitSize int) float64 {
 
 	if endptr != 0 {
 		if digits > 0 {
-			s += ptr(prefix + digits)
+			s += sptr_t(prefix + digits)
 		}
-		store32(memory, uptr(endptr), uint32(s))
+		store32(memory, cptr_t(uptr_t(endptr)), uint32(s))
 	}
 	return val
 }
 
-func strtoll_helper(s, endptr ptr, base int32, bitSize int) int64 {
-	m0 := memory[uptr(s):]
+func strtoll_helper(s, endptr sptr_t, base int32, bitSize int) int64 {
+	m0 := memory[uptr_t(s):]
 	m1 := bytes.TrimLeft(m0, " \t\n\v\f\r")
 	m2 := bytes.TrimLeft(m1, "+-0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	prefix := len(m0) - len(m1)
@@ -75,15 +75,15 @@ func strtoll_helper(s, endptr ptr, base int32, bitSize int) int64 {
 
 	if endptr != 0 {
 		if digits > 0 {
-			s += ptr(prefix + digits)
+			s += sptr_t(prefix + digits)
 		}
-		store32(memory, uptr(endptr), uint32(s))
+		store32(memory, cptr_t(uptr_t(endptr)), uint32(s))
 	}
 	return val
 }
 
-func strtoull_helper(s, endptr ptr, base int32, bitSize int) uint64 {
-	m0 := memory[uptr(s):]
+func strtoull_helper(s, endptr sptr_t, base int32, bitSize int) uint64 {
+	m0 := memory[uptr_t(s):]
 	m1 := bytes.TrimLeft(m0, " \t\n\v\f\r")
 
 	var neg bool
@@ -119,9 +119,9 @@ func strtoull_helper(s, endptr ptr, base int32, bitSize int) uint64 {
 
 	if endptr != 0 {
 		if digits > 0 {
-			s += ptr(prefix + digits)
+			s += sptr_t(prefix + digits)
 		}
-		store32(memory, uptr(endptr), uint32(s))
+		store32(memory, cptr_t(uptr_t(endptr)), uint32(s))
 	}
 	return val
 }
